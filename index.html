@@ -798,21 +798,20 @@
 
     .manifesto-grid {
       display: grid;
-      grid-template-columns: 0.82fr 1.18fr;
+      grid-template-columns: 0.78fr 1.22fr;
       gap: 72px;
-      align-items: start;
+      align-items: end;
       margin-top: 32px;
-      margin-bottom: 80px;
+      margin-bottom: 72px;
     }
 
     .manifesto-title {
       font-family: var(--font-serif);
       font-weight: 300;
-      font-size: clamp(58px, 6.4vw, 88px);
-      line-height: 0.96;
+      font-size: clamp(54px, 5.8vw, 82px);
+      line-height: 0.98;
       letter-spacing: -0.025em;
       color: var(--text-cream-dark);
-      margin-bottom: 36px;
     }
 
     .manifesto-title em {
@@ -822,46 +821,23 @@
       color: var(--bronze);
     }
 
-    .manifesto-note {
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-size: 17.5px;
-      line-height: 1.52;
-      color: var(--text-cream-muted);
-      max-width: 340px;
-    }
-
-    .articles-list {
+    .manifesto-statement-wrap {
       border-top: 1px solid var(--border-cream);
+      padding-top: 36px;
     }
 
-    .article-row {
-      display: grid;
-      grid-template-columns: 82px 1fr;
-      gap: 16px;
-      padding: 25px 0;
-      border-bottom: 1px solid var(--border-cream);
-      align-items: baseline;
-    }
-
-    .article-num {
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-size: 21px;
-      color: var(--bronze);
-    }
-
-    .article-text {
+    .manifesto-statement {
       font-family: var(--font-serif);
       font-weight: 400;
-      font-size: 21px;
-      line-height: 1.44;
-      color: #2b2c30;
+      font-size: clamp(25px, 2.5vw, 34px);
+      line-height: 1.38;
+      letter-spacing: -0.01em;
+      color: #18191d;
     }
 
-    .article-text strong {
-      font-weight: 600;
-      color: #111215;
+    .manifesto-statement em {
+      font-style: italic;
+      color: var(--bronze);
     }
 
     .manifesto-footer {
@@ -1557,66 +1533,26 @@
       <div class="manifesto-grid">
         <div>
           <h2 class="manifesto-title">
-            Seven<br />
-            <em>articles</em><br />
-            of intent.
+            Sovereignty<br />
+            is not a<br />
+            <em>feature.</em>
           </h2>
-          <p class="manifesto-note">
-            Our architectural charter for sovereign, multi-agent systems —
-            defining the non-negotiable guarantees for compute locality,
-            credential isolation, inter-agent trust, and verifiable lineage.
-          </p>
         </div>
 
-        <div class="articles-list">
-          <div class="article-row">
-            <span class="article-num">I.</span>
-            <p class="article-text">
-              <strong>Local-first execution by default.</strong> Inference, tool execution, and orchestration run on hardware you own first — paging external cloud compute only for explicitly delegated burst workloads.
-            </p>
-          </div>
-          <div class="article-row">
-            <span class="article-num">II.</span>
-            <p class="article-text">
-              <strong>Adversarial consensus over monolithic trust.</strong> No critical action relies on a single model pass; specialized agents plan, cross-examine, and verify outputs against deterministic constraints before committing state.
-            </p>
-          </div>
-          <div class="article-row">
-            <span class="article-num">III.</span>
-            <p class="article-text">
-              <strong>Explicitly attested agent links.</strong> Agents never communicate through open discovery or opaque relays. Every counterpart, routing key, and permission boundary is cryptographically registered and operator-approved.
-            </p>
-          </div>
-          <div class="article-row">
-            <span class="article-num">IV.</span>
-            <p class="article-text">
-              <strong>Zero-key transit across the perimeter.</strong> Private keys, session capabilities, and raw personal corpora remain strictly on-device; remote workers receive only minimal, ephemeral context scoped to a single task.
-            </p>
-          </div>
-          <div class="article-row">
-            <span class="article-num">V.</span>
-            <p class="article-text">
-              <strong>On-device adaptation without data exfiltration.</strong> Long-running agents refine their policies from local execution traces through on-premise SFT and RL — your operational history never trains a third-party model.
-            </p>
-          </div>
-          <div class="article-row">
-            <span class="article-num">VI.</span>
-            <p class="article-text">
-              <strong>Cryptographic lineage for every claim and action.</strong> Every retrieved document chunk carries verifiable source provenance, and every inter-agent message or tool call produces an immutable audit trail.
-            </p>
-          </div>
-          <div class="article-row">
-            <span class="article-num">VII.</span>
-            <p class="article-text">
-              <strong>Open protocols and replaceable primitives.</strong> Every layer speaks inspectable, standard interfaces — from OpenAI-compatible inference kernels to MCP daemons — so you can audit, swap, or self-host the entire stack.
-            </p>
-          </div>
+        <div class="manifesto-statement-wrap">
+          <p class="manifesto-statement">
+            An intelligence that only works by streaming your keys, your memory,
+            and your private context to someone else's cluster is not <em>yours</em>.
+            We build multi-agent systems that execute on your hardware first,
+            verify work across independent peers, and treat every retrieval,
+            message, and tool call as an auditable contract under your control.
+          </p>
         </div>
       </div>
 
       <div class="manifesto-footer">
-        <div class="manifesto-sig">— Persydos, et alii</div>
-        <div class="manifesto-date">AUG 12 · 2024 · 03ʰ04ᵐ</div>
+        <div class="manifesto-sig">— Persydos AI</div>
+        <div class="manifesto-date">NEW YORK · Α 03ʰ04ᵐ · Δ +58°</div>
       </div>
     </div>
   </section>
