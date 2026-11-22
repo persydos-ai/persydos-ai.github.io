@@ -854,9 +854,14 @@
     .article-text {
       font-family: var(--font-serif);
       font-weight: 400;
-      font-size: 22px;
-      line-height: 1.38;
-      color: #1c1d21;
+      font-size: 21px;
+      line-height: 1.44;
+      color: #2b2c30;
+    }
+
+    .article-text strong {
+      font-weight: 600;
+      color: #111215;
     }
 
     .manifesto-footer {
@@ -1175,9 +1180,9 @@
     </nav>
 
     <div class="nav-actions">
-      <a href="#invitation" class="nav-signin" data-open-modal="signin">Sign in</a>
+      <a href="#manifesto" class="nav-signin">Charter</a>
       <button type="button" class="btn-light" data-open-modal="access">
-        Request access <span aria-hidden="true">→</span>
+        Stay tuned <span aria-hidden="true">→</span>
       </button>
     </div>
   </header>
@@ -1446,7 +1451,7 @@
           </div>
         </article>
 
-        <!-- P-03 Bifrostly -->
+        <!-- P-03 Protosend -->
         <article class="obs-card">
           <div>
             <div class="obs-meta">
@@ -1454,7 +1459,7 @@
               <span class="obs-tag">THE BRIDGE BETWEEN WORLDS</span>
             </div>
             <div class="obs-title-row">
-              <h3 class="obs-name">Bifrostly</h3>
+              <h3 class="obs-name">Protosend</h3>
               <div class="obs-constellation" aria-hidden="true">
                 <svg viewBox="0 0 120 80" fill="none">
                   <path class="constellation-line" d="M24,48 L48,26 L76,50 L98,38" stroke="rgba(255,255,255,0.18)" stroke-width="0.9" />
@@ -1557,55 +1562,53 @@
             of intent.
           </h2>
           <p class="manifesto-note">
-            Drafted in the dark of August, on the night the sky
-            was full of fire. Signed by every engineer at Persydos,
-            and revisited each year on the same date.
+            Our architectural charter for sovereign, multi-agent systems —
+            defining the non-negotiable guarantees for compute locality,
+            credential isolation, inter-agent trust, and verifiable lineage.
           </p>
         </div>
 
         <div class="articles-list">
           <div class="article-row">
             <span class="article-num">I.</span>
-            <p class="article-text">A single mind is a single point of failure.</p>
+            <p class="article-text">
+              <strong>Local-first execution by default.</strong> Inference, tool execution, and orchestration run on hardware you own first — paging external cloud compute only for explicitly delegated burst workloads.
+            </p>
           </div>
           <div class="article-row">
             <span class="article-num">II.</span>
             <p class="article-text">
-              Intelligence, like meteors, is brightest in concert —<br />
-              many small fires, arriving at the atmosphere together.
+              <strong>Adversarial consensus over monolithic trust.</strong> No critical action relies on a single model pass; specialized agents plan, cross-examine, and verify outputs against deterministic constraints before committing state.
             </p>
           </div>
           <div class="article-row">
             <span class="article-num">III.</span>
             <p class="article-text">
-              We refuse the cult of the monolith. We<br />
-              believe in swarms that argue, in agents that<br />
-              disagree, in answers that survive a council.
+              <strong>Explicitly attested agent links.</strong> Agents never communicate through open discovery or opaque relays. Every counterpart, routing key, and permission boundary is cryptographically registered and operator-approved.
             </p>
           </div>
           <div class="article-row">
             <span class="article-num">IV.</span>
             <p class="article-text">
-              The home is not the cloud. We build for the<br />
-              kitchen as carefully as we build for the data center.
+              <strong>Zero-key transit across the perimeter.</strong> Private keys, session capabilities, and raw personal corpora remain strictly on-device; remote workers receive only minimal, ephemeral context scoped to a single task.
             </p>
           </div>
           <div class="article-row">
             <span class="article-num">V.</span>
-            <p class="article-text">Memory is sacred. An agent that forgets you is not your agent.</p>
+            <p class="article-text">
+              <strong>On-device adaptation without data exfiltration.</strong> Long-running agents refine their policies from local execution traces through on-premise SFT and RL — your operational history never trains a third-party model.
+            </p>
           </div>
           <div class="article-row">
             <span class="article-num">VI.</span>
             <p class="article-text">
-              Every retrieval has lineage. Every claim<br />
-              has a citation. Every action has a witness.
+              <strong>Cryptographic lineage for every claim and action.</strong> Every retrieved document chunk carries verifiable source provenance, and every inter-agent message or tool call produces an immutable audit trail.
             </p>
           </div>
           <div class="article-row">
             <span class="article-num">VII.</span>
             <p class="article-text">
-              We send our work into the world the way the Perseids<br />
-              return each August — predictable, generous, and on fire.
+              <strong>Open protocols and replaceable primitives.</strong> Every layer speaks inspectable, standard interfaces — from OpenAI-compatible inference kernels to MCP daemons — so you can audit, swap, or self-host the entire stack.
             </p>
           </div>
         </div>
@@ -1624,12 +1627,12 @@
       <div class="section-marker">
         <span class="sec-num">§ V</span>
         <span class="sec-line"></span>
-        <span class="sec-name">AN INVITATION</span>
+        <span class="sec-name">DISPATCHES</span>
       </div>
 
       <div class="eyebrow">
         <span class="spark">⟢</span>
-        <span>004 · AN INVITATION</span>
+        <span>004 · RELEASE CADENCE</span>
       </div>
 
       <div class="invitation-grid">
@@ -1642,11 +1645,12 @@
 
         <div class="invitation-right">
           <p class="invitation-desc">
-            Early access is rolling out by cohort. Tell us what you'd
-            build with a thousand agents and we'll wire you in.
+            Our core observatories — Boterra, Olxion, Protosend, and FilClade —
+            are rolling out in staged technical previews. Stay tuned for
+            architecture notes, benchmarks, and release dispatches.
           </p>
           <button type="button" class="btn-gold" data-open-modal="access">
-            Request access <span aria-hidden="true">→</span>
+            Stay tuned <span aria-hidden="true">→</span>
           </button>
         </div>
       </div>
@@ -1676,7 +1680,7 @@
             <ul class="footer-links">
               <li><a href="#platform">Boterra</a></li>
               <li><a href="#platform">Olxion</a></li>
-              <li><a href="#platform">Bifrostly</a></li>
+              <li><a href="#platform">Protosend</a></li>
               <li><a href="#platform">FilClade</a></li>
             </ul>
           </div>
@@ -1720,32 +1724,32 @@
     </div>
   </section>
 
-  <!-- ===================== REQUEST ACCESS MODAL ===================== -->
+  <!-- ===================== STAY TUNED / DISPATCHES MODAL ===================== -->
   <div class="modal-backdrop" id="access-modal" role="dialog" aria-modal="true" aria-labelledby="modal-heading">
     <div class="modal-card">
       <button type="button" class="modal-close" id="modal-close-btn" aria-label="Close">×</button>
       <div class="eyebrow" style="margin-bottom: 12px;">
         <span class="spark">⟢</span>
-        <span>COHORT 04 · PERSEID ACCESS</span>
+        <span>ENGINEERING DISPATCHES · PERSEID RELEASES</span>
       </div>
-      <h3 class="modal-title" id="modal-heading">Wire into the <span class="gold-italic">swarm.</span></h3>
+      <h3 class="modal-title" id="modal-heading">Stay <span class="gold-italic">tuned.</span></h3>
       <p class="modal-sub">
-        Tell us about your home topology or team cluster. Keys stay on your hardware.
+        Receive release notifications, technical papers, and self-hosting guides as Boterra, Olxion, Protosend, and FilClade ship.
       </p>
       <form id="access-form">
         <div class="modal-field">
-          <label for="access-email">OPERATOR EMAIL</label>
-          <input type="email" id="access-email" placeholder="operator@domain.org" required />
+          <label for="access-email">EMAIL ADDRESS</label>
+          <input type="email" id="access-email" placeholder="engineer@domain.org" required />
         </div>
         <div class="modal-field">
-          <label for="access-intent">WHAT WILL YOUR SWARM OBSERVE?</label>
-          <textarea id="access-intent" rows="3" placeholder="Local home cluster, hybrid RAG corpus, MCP bridge..."></textarea>
+          <label for="access-intent">OBSERVATORIES OF INTEREST (OPTIONAL)</label>
+          <textarea id="access-intent" rows="3" placeholder="Olxion local inference, Protosend agent messaging, Boterra swarms, FilClade RAG..."></textarea>
         </div>
         <button type="submit" class="btn-gold" style="width: 100%; justify-content: center;">
-          Transmit coordinates <span aria-hidden="true">→</span>
+          Subscribe to dispatches <span aria-hidden="true">→</span>
         </button>
         <div class="modal-status" id="modal-status">
-          ● TELEMETRY LOCKED — COHORT INVITATION QUEUED AT 03ʰ04ᵐ +58°
+          ● REGISTERED — YOU WILL BE NOTIFIED AS NEW RELEASES SHIP
         </div>
       </form>
     </div>
