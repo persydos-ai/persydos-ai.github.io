@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Persydos AI — A shower of minds, watched from home.</title>
   <meta name="description" content="Persydos AI builds home-centric, multi-agent systems for people who'd rather their intelligence live close. Privacy and security first — sovereignty by design." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="fonts/fonts.css" />
   <style>
     :root {
       --bg-dark: #08090d;
@@ -93,12 +91,14 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 16px;
     }
 
     .nav-left {
       display: flex;
       align-items: center;
       gap: 18px;
+      min-width: 0;
     }
 
     .brand {
@@ -111,6 +111,7 @@
       font-size: 22px;
       letter-spacing: -0.01em;
       color: var(--text-primary);
+      white-space: nowrap;
     }
 
     .brand-icon {
@@ -120,6 +121,7 @@
       align-items: center;
       justify-content: center;
       color: var(--gold);
+      flex-shrink: 0;
     }
 
     .brand span.ai {
@@ -159,6 +161,7 @@
       align-items: center;
       gap: 22px;
       font-size: 13px;
+      flex-shrink: 0;
     }
 
     .btn-light {
@@ -189,6 +192,7 @@
     .btn-gold {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
       background-color: var(--gold);
       color: #0b0c10;
@@ -332,7 +336,7 @@
     /* Hero Main Grid */
     .hero-main {
       display: grid;
-      grid-template-columns: 1.25fr 0.95fr;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.95fr);
       gap: 48px;
       align-items: end;
       margin-top: 110px;
@@ -349,6 +353,7 @@
       text-transform: uppercase;
       color: var(--text-muted);
       margin-bottom: 22px;
+      flex-wrap: wrap;
     }
 
     .eyebrow .spark {
@@ -359,7 +364,7 @@
     .hero-title {
       font-family: var(--font-serif);
       font-weight: 300;
-      font-size: clamp(64px, 7.6vw, 104px);
+      font-size: clamp(52px, 7.6vw, 104px);
       line-height: 0.95;
       letter-spacing: -0.025em;
       color: var(--text-primary);
@@ -429,7 +434,7 @@
       border-bottom-color: var(--gold);
     }
 
-    /* ===================== STATS BAR ===================== */
+    /* ===================== STATS / DESIGN TARGETS BAR ===================== */
     .stats-bar-wrapper {
       position: relative;
       z-index: 2;
@@ -442,12 +447,13 @@
       max-width: var(--container-max);
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(5, minmax(0, 1fr));
     }
 
     .stat-cell {
-      padding: 40px 36px 44px;
+      padding: 36px 32px 40px;
       border-right: 1px solid var(--border-dark);
+      min-width: 0;
     }
 
     .stat-cell:first-child {
@@ -458,14 +464,23 @@
       border-right: none;
     }
 
+    .stat-tag {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
     .stat-value {
       font-family: var(--font-serif);
       font-weight: 300;
-      font-size: clamp(44px, 4.4vw, 60px);
+      font-size: clamp(40px, 4.2vw, 56px);
       line-height: 1;
       letter-spacing: -0.02em;
       color: var(--text-primary);
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .stat-value sup {
@@ -479,7 +494,7 @@
       font-weight: 300;
       line-height: 1.5;
       color: var(--text-muted);
-      max-width: 185px;
+      max-width: 205px;
     }
 
     /* ===================== MISSION ===================== */
@@ -491,7 +506,6 @@
       overflow: hidden;
     }
 
-    /* Subtle dotted orbital arcs behind Mission section */
     .orbital-arcs {
       position: absolute;
       left: 0;
@@ -506,7 +520,7 @@
 
     .mission-header-grid {
       display: grid;
-      grid-template-columns: 0.72fr 1.28fr;
+      grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
       gap: 48px;
       align-items: end;
       padding-bottom: 64px;
@@ -520,7 +534,7 @@
     .section-title {
       font-family: var(--font-serif);
       font-weight: 300;
-      font-size: clamp(46px, 5.4vw, 74px);
+      font-size: clamp(42px, 5.4vw, 74px);
       line-height: 1.02;
       letter-spacing: -0.02em;
       color: var(--text-primary);
@@ -528,7 +542,7 @@
 
     .mission-body-grid {
       display: grid;
-      grid-template-columns: 0.95fr 1.05fr;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
       gap: 72px;
       padding: 64px 0 80px;
       border-bottom: 1px solid var(--border-dark);
@@ -538,7 +552,7 @@
       font-family: var(--font-serif);
       font-style: italic;
       font-weight: 400;
-      font-size: clamp(24px, 2.3vw, 31px);
+      font-size: clamp(23px, 2.3vw, 31px);
       line-height: 1.38;
       color: #d8dae3;
       max-width: 500px;
@@ -556,7 +570,7 @@
 
     .pillars-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 48px;
       padding-top: 48px;
     }
@@ -588,7 +602,7 @@
 
     .platform-header-grid {
       display: grid;
-      grid-template-columns: 0.78fr 1.22fr;
+      grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
       gap: 48px;
       align-items: end;
       margin-bottom: 68px;
@@ -596,7 +610,7 @@
 
     .observatories-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       border: 1px solid var(--border-dark);
       background: rgba(8, 9, 13, 0.74);
       backdrop-filter: blur(6px);
@@ -610,6 +624,7 @@
 
     .obs-card {
       position: relative;
+      min-width: 0;
       padding: 46px 48px 42px;
       display: flex;
       flex-direction: column;
@@ -636,6 +651,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
       font-family: var(--font-mono);
       font-size: 10.5px;
       letter-spacing: 0.2em;
@@ -666,18 +683,21 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      gap: 16px;
       margin-bottom: 34px;
+      min-width: 0;
     }
 
     .obs-name {
       font-family: var(--font-serif);
       font-style: italic;
       font-weight: 400;
-      font-size: clamp(50px, 4.8vw, 66px);
+      font-size: clamp(42px, 4.8vw, 66px);
       line-height: 1;
       letter-spacing: -0.015em;
       color: var(--text-primary);
+      min-width: 0;
+      overflow-wrap: anywhere;
     }
 
     .obs-constellation {
@@ -711,7 +731,7 @@
 
     .obs-metrics {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 16px;
       padding-top: 24px;
       border-top: 1px solid var(--border-dark);
@@ -720,10 +740,11 @@
     .obs-metric-label {
       font-family: var(--font-mono);
       font-size: 9.5px;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--text-muted);
       margin-bottom: 8px;
+      overflow-wrap: anywhere;
     }
 
     .obs-metric-val {
@@ -758,7 +779,7 @@
 
     .manifesto-grid {
       display: grid;
-      grid-template-columns: 0.75fr 1.25fr;
+      grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
       gap: 64px;
       align-items: end;
       margin-bottom: 56px;
@@ -767,7 +788,7 @@
     .manifesto-title {
       font-family: var(--font-serif);
       font-weight: 300;
-      font-size: clamp(50px, 5.4vw, 78px);
+      font-size: clamp(44px, 5.4vw, 78px);
       line-height: 0.98;
       letter-spacing: -0.025em;
       color: var(--text-primary);
@@ -788,7 +809,7 @@
     .manifesto-statement {
       font-family: var(--font-serif);
       font-weight: 300;
-      font-size: clamp(23px, 2.3vw, 31px);
+      font-size: clamp(22px, 2.3vw, 31px);
       line-height: 1.42;
       letter-spacing: -0.01em;
       color: #dfe1ea;
@@ -832,7 +853,7 @@
 
     .footer-grid {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
       gap: 48px;
       padding-bottom: 64px;
       border-bottom: 1px solid var(--border-dark);
@@ -886,51 +907,56 @@
       color: var(--text-muted);
     }
 
-    /* ===================== INTERACTIVE MODAL ===================== */
+    /* ===================== ACCESSIBLE MODAL ===================== */
+    .modal-backdrop[hidden] {
+      display: none !important;
+    }
+
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(5, 6, 9, 0.82);
+      background: rgba(5, 6, 9, 0.84);
       backdrop-filter: blur(8px);
       z-index: 100;
       display: flex;
       align-items: center;
       justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.25s ease;
-      padding: 24px;
-    }
-
-    .modal-backdrop.active {
-      opacity: 1;
-      pointer-events: auto;
+      padding: 20px;
     }
 
     .modal-card {
       width: 100%;
       max-width: 480px;
       background: #0d0f16;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      padding: 40px;
+      border: 1px solid rgba(235, 200, 91, 0.24);
+      padding: 40px 36px 36px;
       position: relative;
       box-shadow: 0 28px 80px rgba(0, 0, 0, 0.75);
     }
 
     .modal-close {
       position: absolute;
-      top: 18px;
-      right: 20px;
+      top: 16px;
+      right: 18px;
       background: none;
-      border: none;
+      border: 1px solid transparent;
       color: var(--text-muted);
       font-family: var(--font-mono);
-      font-size: 16px;
+      font-size: 18px;
+      width: 32px;
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
+      border-radius: 2px;
     }
 
-    .modal-close:hover {
+    .modal-close:hover,
+    .modal-close:focus-visible {
       color: var(--text-primary);
+      border-color: rgba(235, 200, 91, 0.45);
+      outline: none;
     }
 
     .modal-title {
@@ -938,55 +964,43 @@
       font-weight: 400;
       font-size: 36px;
       line-height: 1.05;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     .modal-sub {
-      font-size: 13.5px;
+      font-size: 14px;
       color: var(--text-secondary);
-      line-height: 1.55;
+      line-height: 1.62;
       margin-bottom: 24px;
     }
 
-    .modal-field {
-      margin-bottom: 16px;
+    .modal-status-box {
+      padding: 16px;
+      border: 1px solid var(--border-dark);
+      background: rgba(255, 255, 255, 0.02);
+      margin-bottom: 24px;
     }
 
-    .modal-field label {
-      display: block;
+    .modal-status-title {
       font-family: var(--font-mono);
       font-size: 10px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 7px;
-    }
-
-    .modal-field input,
-    .modal-field textarea {
-      width: 100%;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      color: var(--text-primary);
-      font-family: var(--font-sans);
-      font-size: 13.5px;
-      padding: 10px 12px;
-      border-radius: 2px;
-      outline: none;
-      transition: border-color 0.2s ease;
-    }
-
-    .modal-field input:focus,
-    .modal-field textarea:focus {
-      border-color: var(--gold);
-    }
-
-    .modal-status {
-      margin-top: 14px;
-      font-family: var(--font-mono);
-      font-size: 11px;
       color: var(--gold);
-      display: none;
+      margin-bottom: 6px;
+    }
+
+    .modal-status-text {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    .modal-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
     /* ===================== RESPONSIVE ===================== */
@@ -1003,17 +1017,17 @@
       .mission-body-grid,
       .platform-header-grid,
       .manifesto-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
         gap: 36px;
       }
       .stats-bar {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
       .stat-cell {
         border-bottom: 1px solid var(--border-dark);
       }
       .observatories-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
       }
       .obs-card {
         border-right: none !important;
@@ -1023,7 +1037,7 @@
         border-bottom: none !important;
       }
       .footer-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
@@ -1032,19 +1046,84 @@
         display: none;
       }
       .container, .navbar, .hero {
-        padding-left: 22px;
-        padding-right: 22px;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      .hero {
+        min-height: auto;
+        padding-top: 24px;
+        padding-bottom: 48px;
+      }
+      .hero-main {
+        margin-top: 56px;
+      }
+      .stat-cell,
+      .stat-cell:first-child {
+        padding: 28px 20px;
+        border-right: none;
       }
       .pillars-grid,
       .stats-bar,
       .footer-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .obs-card {
+        padding: 28px 20px 26px;
+      }
+      .obs-title-row {
+        flex-wrap: wrap;
+        margin-bottom: 24px;
+      }
+      .obs-name {
+        font-size: clamp(34px, 10vw, 48px);
+      }
+      .obs-constellation {
+        width: 82px;
+        height: 56px;
+      }
+      .obs-metrics {
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+        gap: 14px;
+      }
+      .manifesto-card {
+        padding: 28px 20px;
+      }
+      .modal-card {
+        padding: 28px 20px 24px;
       }
       .footer-bottom,
       .manifesto-footer {
         flex-direction: column;
         align-items: flex-start;
         gap: 12px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .container, .navbar, .hero {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+      .obs-card {
+        padding: 22px 16px 20px;
+      }
+      .obs-metrics {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+      .live-dot {
+        animation: none;
+      }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
       }
     }
   </style>
@@ -1055,7 +1134,7 @@
   <canvas id="sky-canvas" aria-hidden="true"></canvas>
 
   <!-- ===================== HEADER / NAVBAR ===================== -->
-  <header class="navbar">
+  <header class="navbar" id="site-header">
     <div class="nav-left">
       <a href="#" class="brand">
         <span class="brand-icon" aria-hidden="true">
@@ -1077,397 +1156,404 @@
     </nav>
 
     <div class="nav-actions">
-      <button type="button" class="btn-light" data-open-modal="access">
+      <button type="button" class="btn-light" data-open-modal="access" aria-haspopup="dialog" aria-controls="access-modal">
         Stay tuned <span aria-hidden="true">→</span>
       </button>
     </div>
   </header>
 
-  <!-- ===================== HERO SECTION ===================== -->
-  <section class="hero-wrapper">
-    <div class="hero">
-      <!-- Left Vertical Astronomical Telemetry Rail -->
-      <div class="astro-rail" aria-hidden="true">
-        <span class="astro-rail-mag">MAG −1.4</span>
-        <span class="astro-rail-line"></span>
-        <span class="astro-rail-radiant">PERSEID RADIANT · 03ʰ 04ᵐ +58°</span>
-      </div>
-
-      <!-- Corner Reticles -->
-      <div class="reticle-bl" aria-hidden="true"></div>
-      <div class="reticle-br" aria-hidden="true"></div>
-
-      <!-- Top-Right Live Telemetry HUD -->
-      <div class="telemetry-hud" id="telemetry-hud" aria-label="Live Swarm Telemetry">
-        <div class="telemetry-live">
-          <span class="live-dot"></span>
-          <span>LIVE</span>
+  <main id="site-main">
+    <!-- ===================== HERO SECTION ===================== -->
+    <section class="hero-wrapper">
+      <div class="hero">
+        <!-- Left Vertical Astronomical Telemetry Rail -->
+        <div class="astro-rail" aria-hidden="true">
+          <span class="astro-rail-mag">MAG −1.4</span>
+          <span class="astro-rail-line"></span>
+          <span class="astro-rail-radiant">PERSEID RADIANT · 03ʰ 04ᵐ +58°</span>
         </div>
-        <div id="live-utc-clock">2026-11-22 09:56:15 UTC</div>
-        <div id="live-swarm-count">247 AGENTS · 8 SWARMS</div>
-      </div>
 
-      <!-- Main Hero Content -->
-      <div class="hero-main">
-        <div class="hero-left">
-          <div class="eyebrow">
-            <span class="spark">⟢</span>
-            <span>AN INTELLIGENCE COMPANY</span>
+        <!-- Corner Reticles -->
+        <div class="reticle-bl" aria-hidden="true"></div>
+        <div class="reticle-br" aria-hidden="true"></div>
+
+        <!-- Top-Right Live Telemetry HUD -->
+        <div class="telemetry-hud" id="telemetry-hud" aria-label="Observatory Telemetry">
+          <div class="telemetry-live">
+            <span class="live-dot"></span>
+            <span>OBSERVATORY CLOCK</span>
           </div>
-          <h1 class="hero-title">
-            A shower<br />
-            of <em>minds,</em><br />
-            watched from<br />
-            <em>home.</em>
-          </h1>
+          <div id="live-utc-clock">---- -- -- --:--:-- UTC</div>
+          <div id="live-swarm-count">4 OBSERVATORIES · LOCAL-FIRST</div>
         </div>
 
-        <div class="hero-right">
-          <p class="hero-desc">
-            Persydos AI builds home-centric, multi-agent systems
-            for people who'd rather their intelligence live close.
-            Swarms that think on the kitchen counter, retrieval that
-            never leaks, a bridge to the cloud that carries no keys.
-            Privacy and security first — sovereignty by design.
+        <!-- Main Hero Content -->
+        <div class="hero-main">
+          <div class="hero-left">
+            <div class="eyebrow">
+              <span class="spark">⟢</span>
+              <span>AN INTELLIGENCE COMPANY</span>
+            </div>
+            <h1 class="hero-title">
+              A shower<br />
+              of <em>minds,</em><br />
+              watched from<br />
+              <em>home.</em>
+            </h1>
+          </div>
+
+          <div class="hero-right">
+            <p class="hero-desc">
+              Persydos AI builds home-centric, multi-agent systems
+              for people who'd rather their intelligence live close.
+              Swarms that think on the kitchen counter, retrieval that
+              never leaks, a bridge to the cloud that carries no keys.
+              Privacy and security first — sovereignty by design.
+            </p>
+            <div class="hero-ctas">
+              <a href="#platform" class="btn-HeroPrimary" id="watch-swarm-btn">
+                Watch the swarm <span aria-hidden="true">→</span>
+              </a>
+              <a href="#manifesto" class="link-underline">Read the manifesto</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 5-COLUMN DESIGN TARGETS BAR ===================== -->
+    <section class="stats-bar-wrapper" aria-label="Architecture Design Targets">
+      <div class="stats-bar">
+        <div class="stat-cell">
+          <div class="stat-tag">DESIGN TARGET</div>
+          <div class="stat-value">10<sup>9</sup></div>
+          <div class="stat-label">target document scale for local-first hybrid indexing</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-tag">DESIGN TARGET</div>
+          <div class="stat-value">&lt; 5s</div>
+          <div class="stat-label">target p50 time to consensus across local swarm peers</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-tag">GUARANTEE</div>
+          <div class="stat-value">0</div>
+          <div class="stat-label">private keys transmitted across external boundaries</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-tag">ARCHITECTURE</div>
+          <div class="stat-value">4</div>
+          <div class="stat-label">core observatories in the Persydos stack</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-tag">DEFAULT POSTURE</div>
+          <div class="stat-value">100%</div>
+          <div class="stat-label">default home state on-device; cloud invoked only on request</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== MISSION ===================== -->
+    <section id="mission" class="mission-section">
+      <!-- Background Dotted Orbital Arcs -->
+      <svg class="orbital-arcs" viewBox="0 0 1440 360" fill="none" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M-80 340 Q 720 -90 1520 340" stroke="rgba(255,255,255,0.11)" stroke-width="1" stroke-dasharray="2.5 5.5" />
+        <path d="M-80 375 Q 720 -40 1520 375" stroke="rgba(255,255,255,0.07)" stroke-width="1" stroke-dasharray="2 6" />
+      </svg>
+
+      <div class="container">
+        <div class="mission-header-grid">
+          <div class="mission-eyebrow-wrap">
+            <div class="eyebrow" style="margin-bottom: 0;">
+              <span class="spark">⟢</span>
+              <span>MISSION · WHY WE EXIST</span>
+            </div>
+          </div>
+          <h2 class="section-title">
+            Intelligence is better<br />
+            when it's <span class="gold-italic">closer to home.</span>
+          </h2>
+        </div>
+
+        <div class="mission-body-grid">
+          <p class="mission-lead">
+            We're building Persydos AI to put real intelligence
+            — not a thin client, not a remote API — into
+            homes, small teams, and independent operators.
           </p>
-          <div class="hero-ctas">
-            <a href="#platform" class="btn-HeroPrimary" id="watch-swarm-btn">
-              Watch the swarm <span aria-hidden="true">→</span>
-            </a>
-            <a href="#manifesto" class="link-underline">Read the manifesto</a>
+          <div class="mission-copy">
+            <p>
+              The cloud has done extraordinary work to make AI possible at scale, and it
+              will keep doing so. Alongside it, we think there's room — and real demand
+              — for intelligence that lives closer to the people using it: on the phone in
+              your hand, the laptop on the desk, the small box in the closet.
+            </p>
+            <p>
+              Democratizing AI, to us, simply means more places where compute,
+              memory, and keys can comfortably live. Persydos AI complements the
+              cloud rather than replacing it, and reaches for it only when you ask.
+            </p>
+          </div>
+        </div>
+
+        <div class="pillars-grid">
+          <div class="pillar">
+            <h3 class="pillar-title">Yours.</h3>
+            <p class="pillar-desc">Your data, your devices, your keys. Always.</p>
+          </div>
+          <div class="pillar">
+            <h3 class="pillar-title">Open.</h3>
+            <p class="pillar-desc">Open weights, open protocols, open seats at the table.</p>
+          </div>
+          <div class="pillar">
+            <h3 class="pillar-title">Plural.</h3>
+            <p class="pillar-desc">Many small minds in concert beat one big mind alone.</p>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===================== 5-COLUMN STATS BAR ===================== -->
-  <section class="stats-bar-wrapper" aria-label="Key Metrics">
-    <div class="stats-bar">
-      <div class="stat-cell">
-        <div class="stat-value">10<sup>9</sup></div>
-        <div class="stat-label">documents indexed across customer corpora</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-value">247</div>
-        <div class="stat-label">agents in the median Swarm deployment</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-value">4.8s</div>
-        <div class="stat-label">time to consensus, p50</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-value">74</div>
-        <div class="stat-label">languages spoken by the agents</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-value">100%</div>
-        <div class="stat-label">of home traffic stays on-device</div>
-      </div>
-    </div>
-  </section>
+    <!-- ===================== PLATFORM ===================== -->
+    <section id="platform" class="platform-section">
+      <div class="container">
+        <div class="platform-header-grid">
+          <div class="mission-eyebrow-wrap">
+            <div class="eyebrow" style="margin-bottom: 0;">
+              <span class="spark">⟢</span>
+              <span>PLATFORM · FOUR OBSERVATORIES</span>
+            </div>
+          </div>
+          <h2 class="section-title">
+            Many instruments.<br />
+            One <span class="gold-italic">shared sky.</span>
+          </h2>
+        </div>
 
-  <!-- ===================== MISSION ===================== -->
-  <section id="mission" class="mission-section">
-    <!-- Background Dotted Orbital Arcs -->
-    <svg class="orbital-arcs" viewBox="0 0 1440 360" fill="none" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M-80 340 Q 720 -90 1520 340" stroke="rgba(255,255,255,0.11)" stroke-width="1" stroke-dasharray="2.5 5.5" />
-      <path d="M-80 375 Q 720 -40 1520 375" stroke="rgba(255,255,255,0.07)" stroke-width="1" stroke-dasharray="2 6" />
-    </svg>
+        <div class="observatories-grid" id="observatories-grid">
+          <!-- P-01 Boterra -->
+          <article class="obs-card" id="obs-boterra">
+            <div>
+              <div class="obs-meta">
+                <span class="obs-code">P-01</span>
+                <span class="obs-tag">MULTI-AGENT PLATFORM</span>
+              </div>
+              <div class="obs-title-row">
+                <h3 class="obs-name">Boterra</h3>
+                <div class="obs-constellation" aria-hidden="true">
+                  <svg viewBox="0 0 120 80" fill="none">
+                    <polyline class="constellation-line" points="28,36 33,62 66,74 86,52 68,26" stroke="rgba(255,255,255,0.2)" stroke-width="0.9" />
+                    <circle cx="14" cy="48" r="0.9" fill="rgba(255,255,255,0.35)" />
+                    <circle cx="52" cy="44" r="1" fill="rgba(255,255,255,0.4)" />
+                    <circle cx="28" cy="36" r="1.6" fill="#d8dae3" />
+                    <circle cx="33" cy="62" r="1.6" fill="#d8dae3" />
+                    <circle class="constellation-star-main" cx="66" cy="74" r="2.1" fill="#f3f1ea" />
+                    <circle cx="86" cy="52" r="1.7" fill="#d8dae3" />
+                    <circle class="constellation-star-main" cx="68" cy="26" r="1.9" fill="#ebc85b" />
+                  </svg>
+                </div>
+              </div>
+              <p class="obs-desc">
+                Spawn, orchestrate, and observe constellations of agents that live where
+                you live — on the kitchen counter, in the home server, on the family laptop,
+                and on the cloud when the work demands it. Local and remote agents
+                negotiate as one swarm; sensitive context stays home, raw horsepower
+                comes from the cloud.
+              </p>
+            </div>
+            <div class="obs-metrics">
+              <div>
+                <div class="obs-metric-label">TARGET SCALE</div>
+                <div class="obs-metric-val">1 — 10<sup>k</sup></div>
+              </div>
+              <div>
+                <div class="obs-metric-label">TARGET CONSENSUS</div>
+                <div class="obs-metric-val">&lt; 5 s</div>
+              </div>
+              <div>
+                <div class="obs-metric-label">EXECUTION</div>
+                <div class="obs-metric-val">local-first</div>
+              </div>
+            </div>
+          </article>
 
-    <div class="container">
-      <div class="mission-header-grid">
-        <div class="mission-eyebrow-wrap">
-          <div class="eyebrow" style="margin-bottom: 0;">
+          <!-- P-02 Olxion -->
+          <article class="obs-card" id="obs-olxion">
+            <div>
+              <div class="obs-meta">
+                <span class="obs-code">P-02</span>
+                <span class="obs-tag">SELF-IMPROVING HOME AGENT</span>
+              </div>
+              <div class="obs-title-row">
+                <h3 class="obs-name">Olxion</h3>
+                <div class="obs-constellation" aria-hidden="true">
+                  <svg viewBox="0 0 120 80" fill="none">
+                    <polygon class="constellation-line" points="64,14 98,34 86,68 42,66 26,44" stroke="rgba(255,255,255,0.16)" stroke-width="0.85" stroke-dasharray="2 3" />
+                    <circle cx="64" cy="14" r="1.8" fill="#d8dae3" />
+                    <circle cx="98" cy="34" r="1.5" fill="#d8dae3" />
+                    <circle class="constellation-star-main" cx="86" cy="68" r="2.1" fill="#f3f1ea" />
+                    <circle cx="42" cy="66" r="1.5" fill="#d8dae3" />
+                    <circle cx="26" cy="44" r="1.7" fill="#d8dae3" />
+                    <circle class="constellation-star-main" cx="62" cy="43" r="1.8" fill="#ebc85b" />
+                    <circle cx="74" cy="69" r="1.1" fill="rgba(255,255,255,0.45)" />
+                  </svg>
+                </div>
+              </div>
+              <p class="obs-desc">
+                A long-running agent that lives on the home network and gets smarter the
+                longer it runs. It learns the rhythms of the household through continuous
+                SFT and RL on its own traces — refining its playbooks nightly, paging a
+                cloud swarm only when the work demands it.
+              </p>
+            </div>
+            <div class="obs-metrics">
+              <div>
+                <div class="obs-metric-label">DEFAULT STATE</div>
+                <div class="obs-metric-val">on-device</div>
+              </div>
+              <div>
+                <div class="obs-metric-label">NIGHTLY</div>
+                <div class="obs-metric-val">SFT + RL</div>
+              </div>
+              <div>
+                <div class="obs-metric-label">MEMORY HORIZON</div>
+                <div class="obs-metric-val">years</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- P-03 Protosend -->
+          <article class="obs-card" id="obs-protosend">
+            <div>
+              <div class="obs-meta">
+                <span class="obs-code">P-03</span>
+                <span class="obs-tag">THE BRIDGE BETWEEN WORLDS</span>
+              </div>
+              <div class="obs-title-row">
+                <h3 class="obs-name">Protosend</h3>
+                <div class="obs-constellation" aria-hidden="true">
+                  <svg viewBox="0 0 120 80" fill="none">
+                    <path class="constellation-line" d="M24,48 L48,26 L76,50 L98,38" stroke="rgba(255,255,255,0.18)" stroke-width="0.9" />
+                    <line class="constellation-line" x1="48" y1="26" x2="46" y2="66" stroke="rgba(255,255,255,0.14)" stroke-width="0.8" />
+                    <circle cx="24" cy="48" r="1.6" fill="#d8dae3" />
+                    <circle class="constellation-star-main" cx="48" cy="26" r="2.1" fill="#f3f1ea" />
+                    <circle cx="56" cy="27" r="1.2" fill="rgba(255,255,255,0.5)" />
+                    <circle cx="46" cy="66" r="1.5" fill="#d8dae3" />
+                    <circle class="constellation-star-main" cx="76" cy="50" r="1.9" fill="#ebc85b" />
+                    <circle cx="75" cy="64" r="1.7" fill="#d8dae3" />
+                    <circle cx="98" cy="38" r="1.6" fill="#d8dae3" />
+                  </svg>
+                </div>
+              </div>
+              <p class="obs-desc">
+                One secure bridge between your phone, your home agents, your MCP
+                servers, and the cloud. Carry a swarm in your pocket; let it reach back to
+                the kitchen and out to the rack — with end-to-end attestation, no key ever
+                leaves your devices.
+              </p>
+            </div>
+            <div class="obs-metrics">
+              <div>
+                <div class="obs-metric-label">ATTESTATION</div>
+                <div class="obs-metric-val">owner-approved</div>
+              </div>
+              <div>
+                <div class="obs-metric-label">KEYS IN TRANSIT</div>
+                <div class="obs-metric-val">zero</div>
+              </div>
+              <div>
+                <div class="obs-metric-label">ENDPOINTS</div>
+                <div class="obs-metric-val">every device</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- P-04 FilClade -->
+          <article class="obs-card" id="obs-filclade">
+            <div>
+              <div class="obs-meta">
+                <span class="obs-code">P-04</span>
+                <span class="obs-tag">RETRIEVAL &amp; RAG</span>
+              </div>
+              <div class="obs-title-row">
+                <h3 class="obs-name">FilClade</h3>
+                <div class="obs-constellation" aria-hidden="true">
+                  <svg viewBox="0 0 120 80" fill="none">
+                    <path class="constellation-line" d="M22,56 L36,26 L74,20 L102,48 L66,60 L66,76" stroke="rgba(255,255,255,0.18)" stroke-width="0.9" />
+                    <line class="constellation-line" x1="74" y1="20" x2="66" y2="60" stroke="rgba(255,255,255,0.14)" stroke-width="0.8" />
+                    <circle cx="22" cy="56" r="1.7" fill="#d8dae3" />
+                    <circle cx="34" cy="26" r="1.5" fill="#d8dae3" />
+                    <circle cx="39" cy="26" r="1.2" fill="rgba(255,255,255,0.5)" />
+                    <circle class="constellation-star-main" cx="74" cy="20" r="2.0" fill="#ebc85b" />
+                    <circle cx="102" cy="48" r="1.7" fill="#d8dae3" />
+                    <circle class="constellation-star-main" cx="66" cy="60" r="2.0" fill="#f3f1ea" />
+                    <circle cx="66" cy="76" r="1.4" fill="#d8dae3" />
+                  </svg>
+                </div>
+              </div>
+              <p class="obs-desc">
+                A retrieval layer designed for swarms — many agents asking many
+                questions at once. Hybrid graph-vector index, sub-100ms target recall
+                at billion-document scale, audit-grade lineage.
+              </p>
+            </div>
+            <div class="obs-metrics">
+              <div>
+                <div class="obs-metric-label">TARGET INDEX</div>
+                <div class="obs-metric-val">10<sup>9</sup> docs</div>
+              </div>
+              <div>
+                <div class="obs-metric-label">TARGET RECALL</div>
+                <div class="obs-metric-val">&lt; 100 ms</div>
+              </div>
+              <div>
+                <div class="obs-metric-label">LINEAGE</div>
+                <div class="obs-metric-val">cryptographic</div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== MANIFESTO ===================== -->
+    <section id="manifesto" class="manifesto-section">
+      <div class="container">
+        <div class="manifesto-card">
+          <div class="eyebrow" style="margin-bottom: 28px;">
             <span class="spark">⟢</span>
-            <span>MISSION · WHY WE EXIST</span>
+            <span>MANIFESTO · ARCHITECTURAL PRINCIPLE</span>
           </div>
-        </div>
-        <h2 class="section-title">
-          Intelligence is better<br />
-          when it's <span class="gold-italic">closer to home.</span>
-        </h2>
-      </div>
 
-      <div class="mission-body-grid">
-        <p class="mission-lead">
-          We're building Persydos AI to put real intelligence
-          — not a thin client, not a remote API — into
-          homes, small teams, and independent operators.
-        </p>
-        <div class="mission-copy">
-          <p>
-            The cloud has done extraordinary work to make AI possible at scale, and it
-            will keep doing so. Alongside it, we think there's room — and real demand
-            — for intelligence that lives closer to the people using it: on the phone in
-            your hand, the laptop on the desk, the small box in the closet.
-          </p>
-          <p>
-            Democratizing AI, to us, simply means more places where compute,
-            memory, and keys can comfortably live. Persydos AI complements the
-            cloud rather than replacing it, and reaches for it only when you ask.
-          </p>
-        </div>
-      </div>
+          <div class="manifesto-grid">
+            <div>
+              <h2 class="manifesto-title">
+                Sovereignty<br />
+                is not a<br />
+                <em>feature.</em>
+              </h2>
+            </div>
 
-      <div class="pillars-grid">
-        <div class="pillar">
-          <h3 class="pillar-title">Yours.</h3>
-          <p class="pillar-desc">Your data, your devices, your keys. Always.</p>
-        </div>
-        <div class="pillar">
-          <h3 class="pillar-title">Open.</h3>
-          <p class="pillar-desc">Open weights, open protocols, open seats at the table.</p>
-        </div>
-        <div class="pillar">
-          <h3 class="pillar-title">Plural.</h3>
-          <p class="pillar-desc">Many small minds in concert beat one big mind alone.</p>
+            <div class="manifesto-statement-wrap">
+              <p class="manifesto-statement">
+                An intelligence that only works by streaming your keys, your memory,
+                and your private context to someone else's cluster is not <em>yours</em>.
+                We build multi-agent systems that execute on your hardware first,
+                verify work across independent peers, and treat every retrieval,
+                message, and tool call as an auditable contract under your control.
+              </p>
+            </div>
+          </div>
+
+          <div class="manifesto-footer">
+            <div class="manifesto-sig">— Persydos AI</div>
+            <div class="manifesto-date">Α 03ʰ04ᵐ · Δ +58°</div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ===================== PLATFORM ===================== -->
-  <section id="platform" class="platform-section">
-    <div class="container">
-      <div class="platform-header-grid">
-        <div class="mission-eyebrow-wrap">
-          <div class="eyebrow" style="margin-bottom: 0;">
-            <span class="spark">⟢</span>
-            <span>PLATFORM · FOUR OBSERVATORIES</span>
-          </div>
-        </div>
-        <h2 class="section-title">
-          Many instruments.<br />
-          One <span class="gold-italic">shared sky.</span>
-        </h2>
-      </div>
-
-      <div class="observatories-grid" id="observatories-grid">
-        <!-- P-01 Boterra -->
-        <article class="obs-card" id="obs-boterra">
-          <div>
-            <div class="obs-meta">
-              <span class="obs-code">P-01</span>
-              <span class="obs-tag">MULTI-AGENT PLATFORM</span>
-            </div>
-            <div class="obs-title-row">
-              <h3 class="obs-name">Boterra</h3>
-              <div class="obs-constellation" aria-hidden="true">
-                <svg viewBox="0 0 120 80" fill="none">
-                  <polyline class="constellation-line" points="28,36 33,62 66,74 86,52 68,26" stroke="rgba(255,255,255,0.2)" stroke-width="0.9" />
-                  <circle cx="14" cy="48" r="0.9" fill="rgba(255,255,255,0.35)" />
-                  <circle cx="52" cy="44" r="1" fill="rgba(255,255,255,0.4)" />
-                  <circle cx="28" cy="36" r="1.6" fill="#d8dae3" />
-                  <circle cx="33" cy="62" r="1.6" fill="#d8dae3" />
-                  <circle class="constellation-star-main" cx="66" cy="74" r="2.1" fill="#f3f1ea" />
-                  <circle cx="86" cy="52" r="1.7" fill="#d8dae3" />
-                  <circle class="constellation-star-main" cx="68" cy="26" r="1.9" fill="#ebc85b" />
-                </svg>
-              </div>
-            </div>
-            <p class="obs-desc">
-              Spawn, orchestrate, and observe constellations of agents that live where
-              you live — on the kitchen counter, in the home server, on the family laptop,
-              and on the cloud when the work demands it. Local and remote agents
-              negotiate as one swarm; sensitive context stays home, raw horsepower
-              comes from the cloud.
-            </p>
-          </div>
-          <div class="obs-metrics">
-            <div>
-              <div class="obs-metric-label">AGENTS / SWARM</div>
-              <div class="obs-metric-val">1 — 10<sup>k</sup></div>
-            </div>
-            <div>
-              <div class="obs-metric-label">MEDIAN CONSENSUS</div>
-              <div class="obs-metric-val">4.8 s</div>
-            </div>
-            <div>
-              <div class="obs-metric-label">LANGUAGES</div>
-              <div class="obs-metric-val">74</div>
-            </div>
-          </div>
-        </article>
-
-        <!-- P-02 Olxion -->
-        <article class="obs-card" id="obs-olxion">
-          <div>
-            <div class="obs-meta">
-              <span class="obs-code">P-02</span>
-              <span class="obs-tag">SELF-IMPROVING HOME AGENT</span>
-            </div>
-            <div class="obs-title-row">
-              <h3 class="obs-name">Olxion</h3>
-              <div class="obs-constellation" aria-hidden="true">
-                <svg viewBox="0 0 120 80" fill="none">
-                  <polygon class="constellation-line" points="64,14 98,34 86,68 42,66 26,44" stroke="rgba(255,255,255,0.16)" stroke-width="0.85" stroke-dasharray="2 3" />
-                  <circle cx="64" cy="14" r="1.8" fill="#d8dae3" />
-                  <circle cx="98" cy="34" r="1.5" fill="#d8dae3" />
-                  <circle class="constellation-star-main" cx="86" cy="68" r="2.1" fill="#f3f1ea" />
-                  <circle cx="42" cy="66" r="1.5" fill="#d8dae3" />
-                  <circle cx="26" cy="44" r="1.7" fill="#d8dae3" />
-                  <circle class="constellation-star-main" cx="62" cy="43" r="1.8" fill="#ebc85b" />
-                  <circle cx="74" cy="69" r="1.1" fill="rgba(255,255,255,0.45)" />
-                </svg>
-              </div>
-            </div>
-            <p class="obs-desc">
-              A long-running agent that lives on the home network and gets smarter the
-              longer it runs. It learns the rhythms of the household through continuous
-              SFT and RL on its own traces — refining its playbooks nightly, paging a
-              cloud swarm only when the work demands it.
-            </p>
-          </div>
-          <div class="obs-metrics">
-            <div>
-              <div class="obs-metric-label">ON-DEVICE</div>
-              <div class="obs-metric-val">100%</div>
-            </div>
-            <div>
-              <div class="obs-metric-label">NIGHTLY</div>
-              <div class="obs-metric-val">SFT + RL</div>
-            </div>
-            <div>
-              <div class="obs-metric-label">MEMORY HORIZON</div>
-              <div class="obs-metric-val">years</div>
-            </div>
-          </div>
-        </article>
-
-        <!-- P-03 Protosend -->
-        <article class="obs-card" id="obs-protosend">
-          <div>
-            <div class="obs-meta">
-              <span class="obs-code">P-03</span>
-              <span class="obs-tag">THE BRIDGE BETWEEN WORLDS</span>
-            </div>
-            <div class="obs-title-row">
-              <h3 class="obs-name">Protosend</h3>
-              <div class="obs-constellation" aria-hidden="true">
-                <svg viewBox="0 0 120 80" fill="none">
-                  <path class="constellation-line" d="M24,48 L48,26 L76,50 L98,38" stroke="rgba(255,255,255,0.18)" stroke-width="0.9" />
-                  <line class="constellation-line" x1="48" y1="26" x2="46" y2="66" stroke="rgba(255,255,255,0.14)" stroke-width="0.8" />
-                  <circle cx="24" cy="48" r="1.6" fill="#d8dae3" />
-                  <circle class="constellation-star-main" cx="48" cy="26" r="2.1" fill="#f3f1ea" />
-                  <circle cx="56" cy="27" r="1.2" fill="rgba(255,255,255,0.5)" />
-                  <circle cx="46" cy="66" r="1.5" fill="#d8dae3" />
-                  <circle class="constellation-star-main" cx="76" cy="50" r="1.9" fill="#ebc85b" />
-                  <circle cx="75" cy="64" r="1.7" fill="#d8dae3" />
-                  <circle cx="98" cy="38" r="1.6" fill="#d8dae3" />
-                </svg>
-              </div>
-            </div>
-            <p class="obs-desc">
-              One secure bridge between your phone, your home agents, your MCP
-              servers, and the cloud. Carry a swarm in your pocket; let it reach back to
-              the kitchen and out to the rack — with end-to-end attestation, no key ever
-              leaves your devices.
-            </p>
-          </div>
-          <div class="obs-metrics">
-            <div>
-              <div class="obs-metric-label">BRIDGE LATENCY</div>
-              <div class="obs-metric-val">11 ms</div>
-            </div>
-            <div>
-              <div class="obs-metric-label">KEYS IN TRANSIT</div>
-              <div class="obs-metric-val">zero</div>
-            </div>
-            <div>
-              <div class="obs-metric-label">ENDPOINTS</div>
-              <div class="obs-metric-val">every device</div>
-            </div>
-          </div>
-        </article>
-
-        <!-- P-04 FilClade -->
-        <article class="obs-card" id="obs-filclade">
-          <div>
-            <div class="obs-meta">
-              <span class="obs-code">P-04</span>
-              <span class="obs-tag">RETRIEVAL &amp; RAG</span>
-            </div>
-            <div class="obs-title-row">
-              <h3 class="obs-name">FilClade</h3>
-              <div class="obs-constellation" aria-hidden="true">
-                <svg viewBox="0 0 120 80" fill="none">
-                  <path class="constellation-line" d="M22,56 L36,26 L74,20 L102,48 L66,60 L66,76" stroke="rgba(255,255,255,0.18)" stroke-width="0.9" />
-                  <line class="constellation-line" x1="74" y1="20" x2="66" y2="60" stroke="rgba(255,255,255,0.14)" stroke-width="0.8" />
-                  <circle cx="22" cy="56" r="1.7" fill="#d8dae3" />
-                  <circle cx="34" cy="26" r="1.5" fill="#d8dae3" />
-                  <circle cx="39" cy="26" r="1.2" fill="rgba(255,255,255,0.5)" />
-                  <circle class="constellation-star-main" cx="74" cy="20" r="2.0" fill="#ebc85b" />
-                  <circle cx="102" cy="48" r="1.7" fill="#d8dae3" />
-                  <circle class="constellation-star-main" cx="66" cy="60" r="2.0" fill="#f3f1ea" />
-                  <circle cx="66" cy="76" r="1.4" fill="#d8dae3" />
-                </svg>
-              </div>
-            </div>
-            <p class="obs-desc">
-              A retrieval layer designed for swarms — many agents asking many
-              questions at once. Hybrid graph-vector index, sub-100ms recall on a billion
-              documents, audit-grade lineage.
-            </p>
-          </div>
-          <div class="obs-metrics">
-            <div>
-              <div class="obs-metric-label">INDEX SIZE</div>
-              <div class="obs-metric-val">10<sup>9</sup> docs</div>
-            </div>
-            <div>
-              <div class="obs-metric-label">P99 RECALL</div>
-              <div class="obs-metric-val">84 ms</div>
-            </div>
-            <div>
-              <div class="obs-metric-label">LINEAGE</div>
-              <div class="obs-metric-val">cryptographic</div>
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== MANIFESTO ===================== -->
-  <section id="manifesto" class="manifesto-section">
-    <div class="container">
-      <div class="manifesto-card">
-        <div class="eyebrow" style="margin-bottom: 28px;">
-          <span class="spark">⟢</span>
-          <span>MANIFESTO · ARCHITECTURAL PRINCIPLE</span>
-        </div>
-
-        <div class="manifesto-grid">
-          <div>
-            <h2 class="manifesto-title">
-              Sovereignty<br />
-              is not a<br />
-              <em>feature.</em>
-            </h2>
-          </div>
-
-          <div class="manifesto-statement-wrap">
-            <p class="manifesto-statement">
-              An intelligence that only works by streaming your keys, your memory,
-              and your private context to someone else's cluster is not <em>yours</em>.
-              We build multi-agent systems that execute on your hardware first,
-              verify work across independent peers, and treat every retrieval,
-              message, and tool call as an auditable contract under your control.
-            </p>
-          </div>
-        </div>
-
-        <div class="manifesto-footer">
-          <div class="manifesto-sig">— Persydos AI</div>
-          <div class="manifesto-date">Α 03ʰ04ᵐ · Δ +58°</div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <!-- ===================== FOOTER ===================== -->
-  <footer class="footer-section">
+  <footer class="footer-section" id="site-footer">
     <div class="container">
       <div class="footer-grid">
         <div>
@@ -1513,38 +1599,36 @@
     </div>
   </footer>
 
-  <!-- ===================== STAY TUNED MODAL ===================== -->
-  <div class="modal-backdrop" id="access-modal" role="dialog" aria-modal="true" aria-labelledby="modal-heading">
+  <!-- ===================== STAY TUNED (COMING SOON) MODAL ===================== -->
+  <div class="modal-backdrop" id="access-modal" role="dialog" aria-modal="true" aria-labelledby="modal-heading" hidden inert>
     <div class="modal-card">
-      <button type="button" class="modal-close" id="modal-close-btn" aria-label="Close">×</button>
+      <button type="button" class="modal-close" id="modal-close-btn" aria-label="Close dialog">×</button>
       <div class="eyebrow" style="margin-bottom: 12px;">
         <span class="spark">⟢</span>
-        <span>PERSEID RELEASES</span>
+        <span>PERSEID RELEASES · COMING SOON</span>
       </div>
       <h3 class="modal-title" id="modal-heading">Stay <span class="gold-italic">tuned.</span></h3>
       <p class="modal-sub">
-        Receive release notifications, technical papers, and self-hosting guides as Boterra, Olxion, Protosend, and FilClade ship.
+        Boterra, Olxion, Protosend, and FilClade are currently in active development. Public repositories, technical previews, and self-hosting documentation will be published as each observatory reaches release readiness.
       </p>
-      <form id="access-form">
-        <div class="modal-field">
-          <label for="access-email">EMAIL ADDRESS</label>
-          <input type="email" id="access-email" placeholder="engineer@domain.org" required />
+      <div class="modal-status-box">
+        <div class="modal-status-title">● RELEASE DISPATCHES COMING SOON</div>
+        <div class="modal-status-text">
+          We do not collect email addresses ahead of release. Follow the Persydos AI GitHub organization to watch repository releases and architecture notes directly.
         </div>
-        <div class="modal-field">
-          <label for="access-intent">OBSERVATORIES OF INTEREST (OPTIONAL)</label>
-          <textarea id="access-intent" rows="3" placeholder="Olxion local inference, Protosend agent messaging, Boterra swarms, FilClade RAG..."></textarea>
-        </div>
-        <button type="submit" class="btn-gold" style="width: 100%; justify-content: center;">
-          Notify me on release <span aria-hidden="true">→</span>
+      </div>
+      <div class="modal-actions">
+        <a href="https://github.com/persydos-ai" target="_blank" rel="noopener noreferrer" class="btn-gold">
+          Follow on GitHub <span aria-hidden="true">→</span>
+        </a>
+        <button type="button" class="btn-light" id="modal-dismiss-btn">
+          Close
         </button>
-        <div class="modal-status" id="modal-status">
-          ● REGISTERED — YOU WILL BE NOTIFIED AS NEW RELEASES SHIP
-        </div>
-      </form>
+      </div>
     </div>
   </div>
 
-  <!-- ===================== SCRIPTS: COMET SHOWER & TELEMETRY ===================== -->
+  <!-- ===================== SCRIPTS: COMET SHOWER, MOTION & DIALOG ===================== -->
   <script>
     (function () {
       /* 1. Live UTC Clock */
@@ -1567,27 +1651,19 @@
       updateClock();
       setInterval(updateClock, 1000);
 
-      /* 2. Moving Background Comet & Perseid Meteor Shower Canvas */
+      /* 2. Background Comet & Perseid Meteor Shower Canvas (with prefers-reduced-motion support) */
       const canvas = document.getElementById('sky-canvas');
       const ctx = canvas.getContext('2d');
+      const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
       let width = window.innerWidth;
       let height = window.innerHeight;
       let dpr = Math.min(window.devicePixelRatio || 1, 2);
+      let rafId = null;
 
       const stars = [];
       const comets = [];
       const sparks = [];
-
-      function resizeCanvas() {
-        width = window.innerWidth;
-        height = window.innerHeight;
-        dpr = Math.min(window.devicePixelRatio || 1, 2);
-        canvas.width = width * dpr;
-        canvas.height = height * dpr;
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        initStars();
-      }
 
       function initStars() {
         stars.length = 0;
@@ -1656,19 +1732,24 @@
       }
 
       function seedInitialShower() {
+        comets.length = 0;
+        sparks.length = 0;
         spawnComet({
           heroBolide: true,
-          x: width * 0.24,
-          y: Math.min(height * 0.36, 330)
+          x: width * 0.34,
+          y: Math.min(height * 0.32, 280),
+          angle: -14.5 * (Math.PI / 180)
         });
-        comets[0].life = 70;
+        comets[0].life = 85;
 
-        for (let i = 0; i < 5; i++) {
-          spawnComet({
-            x: Math.random() * width,
-            y: Math.random() * height
-          });
-          comets[comets.length - 1].life = Math.floor(Math.random() * 90);
+        if (!motionQuery.matches) {
+          for (let i = 0; i < 5; i++) {
+            spawnComet({
+              x: Math.random() * width,
+              y: Math.random() * height
+            });
+            comets[comets.length - 1].life = Math.floor(Math.random() * 90);
+          }
         }
       }
 
@@ -1689,7 +1770,6 @@
 
         ctx.save();
 
-        // 1. Soft wide atmospheric golden wake
         const wakeGrad = ctx.createLinearGradient(tailX, tailY, c.x, c.y);
         wakeGrad.addColorStop(0, 'rgba(235, 200, 91, 0)');
         wakeGrad.addColorStop(0.55, `rgba(235, 195, 78, ${alpha * 0.12})`);
@@ -1703,7 +1783,6 @@
         ctx.lineTo(c.x, c.y);
         ctx.stroke();
 
-        // 2. Sharp incandescent core streak
         const coreGrad = ctx.createLinearGradient(tailX, tailY, c.x, c.y);
         coreGrad.addColorStop(0, 'rgba(235, 200, 91, 0)');
         coreGrad.addColorStop(0.4, `rgba(235, 200, 91, ${alpha * 0.35})`);
@@ -1718,7 +1797,6 @@
         ctx.lineTo(c.x, c.y);
         ctx.stroke();
 
-        // 3. Outer golden coma glow around comet head
         const haloRadius = c.headRadius * (c.isHeroBolide ? 9.5 : 6.5);
         const haloGrad = ctx.createRadialGradient(c.x, c.y, 0, c.x, c.y, haloRadius);
         haloGrad.addColorStop(0, `rgba(255, 244, 204, ${alpha * 0.9})`);
@@ -1731,7 +1809,6 @@
         ctx.arc(c.x, c.y, haloRadius, 0, Math.PI * 2);
         ctx.fill();
 
-        // 4. Secondary companion knot
         if (c.isHeroBolide) {
           const knotX = c.x - Math.cos(c.angle) * 11;
           const knotY = c.y - Math.sin(c.angle) * 11;
@@ -1745,7 +1822,6 @@
           ctx.fill();
         }
 
-        // 5. Bright pinpoint nucleus
         ctx.fillStyle = `rgba(255, 252, 240, ${alpha})`;
         ctx.beginPath();
         ctx.arc(c.x, c.y, c.headRadius * 0.9, 0, Math.PI * 2);
@@ -1754,13 +1830,32 @@
         ctx.restore();
       }
 
+      function renderStaticSky() {
+        ctx.clearRect(0, 0, width, height);
+        for (let i = 0; i < stars.length; i++) {
+          const s = stars[i];
+          ctx.fillStyle = `rgba(${s.color}, ${s.baseAlpha.toFixed(3)})`;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        if (comets.length > 0) {
+          drawComet(comets[0]);
+        }
+      }
+
       let frameCount = 0;
 
       function animateSky() {
+        if (motionQuery.matches) {
+          rafId = null;
+          renderStaticSky();
+          return;
+        }
+
         frameCount++;
         ctx.clearRect(0, 0, width, height);
 
-        // Draw twinkling stars
         for (let i = 0; i < stars.length; i++) {
           const s = stars[i];
           s.phase += s.twinkleSpeed;
@@ -1771,7 +1866,6 @@
           ctx.fill();
         }
 
-        // Update and draw comets
         let hasHeroBolide = false;
         for (let i = comets.length - 1; i >= 0; i--) {
           const c = comets[i];
@@ -1798,7 +1892,6 @@
           }
         }
 
-        // Draw golden ionization sparks
         for (let i = sparks.length - 1; i >= 0; i--) {
           const sp = sparks[i];
           sp.alpha -= sp.decay;
@@ -1819,17 +1912,45 @@
           spawnComet();
         }
 
-        requestAnimationFrame(animateSky);
+        rafId = requestAnimationFrame(animateSky);
+      }
+
+      function syncSkyMotion() {
+        if (rafId !== null) {
+          cancelAnimationFrame(rafId);
+          rafId = null;
+        }
+        seedInitialShower();
+        if (motionQuery.matches) {
+          renderStaticSky();
+        } else {
+          rafId = requestAnimationFrame(animateSky);
+        }
+      }
+
+      function resizeCanvas() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        initStars();
+        if (motionQuery.matches) {
+          seedInitialShower();
+          renderStaticSky();
+        }
       }
 
       window.addEventListener('resize', resizeCanvas);
+      if (typeof motionQuery.addEventListener === 'function') {
+        motionQuery.addEventListener('change', syncSkyMotion);
+      }
       resizeCanvas();
-      seedInitialShower();
-      requestAnimationFrame(animateSky);
+      syncSkyMotion();
 
-      /* 3. "Watch the swarm →" interactive comet burst + smooth scroll to Platform Observatories */
+      /* 3. "Watch the swarm →" scroll to Platform Observatories (+ comet burst when motion allowed) */
       const watchSwarmBtn = document.getElementById('watch-swarm-btn');
-      const swarmCountEl = document.getElementById('live-swarm-count');
       const telemetryHud = document.getElementById('telemetry-hud');
       const obsGrid = document.getElementById('observatories-grid');
       const platformSection = document.getElementById('platform');
@@ -1837,29 +1958,30 @@
       if (watchSwarmBtn) {
         watchSwarmBtn.addEventListener('click', function (e) {
           e.preventDefault();
-          // Trigger a vivid burst of Perseid comets across the sky
-          for (let i = 0; i < 8; i++) {
-            setTimeout(() => {
-              spawnComet({
-                heroBolide: i % 2 === 0,
-                x: width * (0.04 + Math.random() * 0.55),
-                y: height * (0.15 + Math.random() * 0.7)
-              });
-            }, i * 90);
+          const reduceMotion = motionQuery.matches;
+
+          if (!reduceMotion) {
+            for (let i = 0; i < 8; i++) {
+              setTimeout(() => {
+                spawnComet({
+                  heroBolide: i % 2 === 0,
+                  x: width * (0.04 + Math.random() * 0.55),
+                  y: height * (0.15 + Math.random() * 0.7)
+                });
+              }, i * 90);
+            }
           }
 
-          if (swarmCountEl) {
-            const agents = 247 + Math.floor(Math.random() * 18);
-            swarmCountEl.textContent = `${agents} AGENTS · 8 SWARMS`;
-          }
           if (telemetryHud) {
             telemetryHud.classList.add('flash');
             setTimeout(() => telemetryHud.classList.remove('flash'), 1200);
           }
 
-          // Smooth scroll to the Four Observatories grid and highlight it
           if (platformSection) {
-            platformSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            platformSection.scrollIntoView({
+              behavior: reduceMotion ? 'auto' : 'smooth',
+              block: 'start'
+            });
           }
           if (obsGrid) {
             obsGrid.classList.add('highlight-pulse');
@@ -1868,41 +1990,93 @@
         });
       }
 
-      /* 4. Modal handlers */
+      /* 4. Accessible Modal Dialog with Focus Management, Inert Background & Escape Handling */
       const modal = document.getElementById('access-modal');
       const closeBtn = document.getElementById('modal-close-btn');
-      const form = document.getElementById('access-form');
-      const statusEl = document.getElementById('modal-status');
+      const dismissBtn = document.getElementById('modal-dismiss-btn');
+      const backgroundRegions = [
+        document.getElementById('site-header'),
+        document.getElementById('site-main'),
+        document.getElementById('site-footer')
+      ].filter(Boolean);
+
+      let lastFocusedTrigger = null;
+
+      function getFocusableElements(container) {
+        return Array.from(
+          container.querySelectorAll(
+            'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+          )
+        );
+      }
+
+      function openModal(triggerEl) {
+        if (!modal) return;
+        lastFocusedTrigger = triggerEl || document.activeElement;
+        modal.removeAttribute('hidden');
+        modal.removeAttribute('inert');
+        backgroundRegions.forEach((el) => {
+          el.setAttribute('inert', '');
+          el.setAttribute('aria-hidden', 'true');
+        });
+        if (closeBtn) {
+          closeBtn.focus();
+        }
+      }
+
+      function closeModal() {
+        if (!modal || modal.hasAttribute('hidden')) return;
+        modal.setAttribute('hidden', '');
+        modal.setAttribute('inert', '');
+        backgroundRegions.forEach((el) => {
+          el.removeAttribute('inert');
+          el.removeAttribute('aria-hidden');
+        });
+        if (lastFocusedTrigger && typeof lastFocusedTrigger.focus === 'function') {
+          lastFocusedTrigger.focus();
+        }
+      }
 
       document.querySelectorAll('[data-open-modal]').forEach((btn) => {
         btn.addEventListener('click', (e) => {
           e.preventDefault();
-          if (statusEl) statusEl.style.display = 'none';
-          modal.classList.add('active');
+          openModal(btn);
         });
       });
 
       if (closeBtn) {
-        closeBtn.addEventListener('click', () => modal.classList.remove('active'));
+        closeBtn.addEventListener('click', closeModal);
       }
-
+      if (dismissBtn) {
+        dismissBtn.addEventListener('click', closeModal);
+      }
       if (modal) {
         modal.addEventListener('click', (e) => {
-          if (e.target === modal) modal.classList.remove('active');
+          if (e.target === modal) closeModal();
         });
       }
 
-      if (form) {
-        form.addEventListener('submit', (e) => {
+      document.addEventListener('keydown', (e) => {
+        if (!modal || modal.hasAttribute('hidden')) return;
+        if (e.key === 'Escape') {
           e.preventDefault();
-          if (statusEl) statusEl.style.display = 'block';
-          spawnComet({ heroBolide: true });
-          setTimeout(() => {
-            modal.classList.remove('active');
-            form.reset();
-          }, 1600);
-        });
-      }
+          closeModal();
+          return;
+        }
+        if (e.key === 'Tab') {
+          const focusables = getFocusableElements(modal);
+          if (focusables.length === 0) return;
+          const first = focusables[0];
+          const last = focusables[focusables.length - 1];
+          if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      });
     })();
   </script>
 </body>
