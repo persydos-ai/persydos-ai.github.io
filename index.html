@@ -1,0 +1,2088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Persydos AI — A shower of minds, watched from home.</title>
+  <meta name="description" content="Persydos AI builds home-centric, multi-agent systems for people who'd rather their intelligence live close. Privacy and security first — sovereignty by design." />
+  <link rel="stylesheet" href="fonts/fonts.css" />
+  <style>
+    :root {
+      --bg-dark: #08090d;
+      --bg-dark-elevated: rgba(13, 15, 22, 0.72);
+      --text-primary: #f3f1ea;
+      --text-secondary: #a1a4b2;
+      --text-muted: #676a78;
+      --gold: #ebc85b;
+      --gold-soft: #e2be52;
+      --gold-dim: rgba(235, 200, 91, 0.25);
+      --border-dark: rgba(255, 255, 255, 0.09);
+      --border-grid: rgba(255, 255, 255, 0.042);
+      --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+      --container-max: 1280px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Full-page fixed moving comet & starfield canvas */
+    #sky-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Subtle celestial grid overlay */
+    .celestial-grid {
+      background-image:
+        linear-gradient(to right, var(--border-grid) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--border-grid) 1px, transparent 1px);
+      background-size: 72px 72px;
+      background-position: center top;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 64px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ===================== TOP NAVBAR ===================== */
+    .navbar {
+      position: relative;
+      z-index: 20;
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 26px 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 500;
+      font-size: 22px;
+      letter-spacing: -0.01em;
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
+
+    .brand-icon {
+      width: 18px;
+      height: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .brand span.ai {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .nav-coords {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      padding-left: 14px;
+      border-left: 1px solid rgba(255, 255, 255, 0.12);
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-secondary);
+    }
+
+    .nav-links a {
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    .btn-light {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: rgba(244, 242, 235, 0.08);
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 9px 16px;
+      border-radius: 2px;
+      border: 1px solid rgba(235, 200, 91, 0.35);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-light:hover {
+      background-color: var(--gold);
+      color: #0b0c10;
+      border-color: var(--gold);
+      transform: translateY(-1px);
+    }
+
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background-color: var(--gold);
+      color: #0b0c10;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 12px 22px;
+      border-radius: 2px;
+      border: 1px solid var(--gold);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-gold:hover {
+      background-color: #f3d46b;
+      box-shadow: 0 0 28px rgba(235, 200, 91, 0.35);
+      transform: translateY(-1px);
+    }
+
+    /* ===================== HERO SECTION ===================== */
+    .hero-wrapper {
+      position: relative;
+      z-index: 2;
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 760px;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 36px 64px 72px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Left vertical astronomical rail */
+    .astro-rail {
+      position: absolute;
+      left: 20px;
+      top: 12px;
+      bottom: 84px;
+      width: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .astro-rail-mag {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      letter-spacing: 0.22em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .astro-rail-line {
+      width: 1px;
+      height: 54px;
+      background: rgba(255, 255, 255, 0.14);
+      margin: 18px 0;
+    }
+
+    .astro-rail-radiant {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      letter-spacing: 0.22em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    /* Corner reticle L-ticks */
+    .reticle-bl,
+    .reticle-br {
+      position: absolute;
+      bottom: 18px;
+      width: 14px;
+      height: 14px;
+      pointer-events: none;
+    }
+
+    .reticle-bl {
+      left: 18px;
+      border-left: 1px solid rgba(255, 255, 255, 0.22);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+    }
+
+    .reticle-br {
+      right: 18px;
+      border-right: 1px solid rgba(255, 255, 255, 0.22);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+    }
+
+    /* Top-right Live Telemetry Block */
+    .telemetry-hud {
+      align-self: flex-end;
+      text-align: right;
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      letter-spacing: 0.16em;
+      line-height: 1.75;
+      color: var(--text-muted);
+      margin-top: 8px;
+      transition: color 0.3s ease;
+    }
+
+    .telemetry-hud.flash {
+      color: var(--gold);
+    }
+
+    .telemetry-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--gold);
+      box-shadow: 0 0 10px var(--gold);
+      animation: pulse-dot 2.4s infinite ease-in-out;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(0.85); }
+    }
+
+    /* Hero Main Grid */
+    .hero-main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.95fr);
+      gap: 48px;
+      align-items: end;
+      margin-top: 110px;
+      margin-bottom: 24px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+
+    .eyebrow .spark {
+      color: var(--gold);
+      font-size: 12px;
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-weight: 300;
+      font-size: clamp(52px, 7.6vw, 104px);
+      line-height: 0.95;
+      letter-spacing: -0.025em;
+      color: var(--text-primary);
+    }
+
+    .hero-title em,
+    .gold-italic {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--gold);
+    }
+
+    .hero-right {
+      max-width: 440px;
+      padding-bottom: 8px;
+    }
+
+    .hero-desc {
+      font-size: 15.5px;
+      font-weight: 300;
+      line-height: 1.68;
+      color: var(--text-secondary);
+      margin-bottom: 30px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .btn-HeroPrimary {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background-color: #f4f2eb;
+      color: #0b0c10;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 12px 20px;
+      border-radius: 2px;
+      border: 1px solid #f4f2eb;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-HeroPrimary:hover {
+      background-color: var(--gold);
+      border-color: var(--gold);
+      box-shadow: 0 0 24px rgba(235, 200, 91, 0.28);
+    }
+
+    .link-underline {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-primary);
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .link-underline:hover {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+
+    /* ===================== STATS / DESIGN TARGETS BAR ===================== */
+    .stats-bar-wrapper {
+      position: relative;
+      z-index: 2;
+      border-bottom: 1px solid var(--border-dark);
+      background: rgba(8, 9, 13, 0.65);
+      backdrop-filter: blur(4px);
+    }
+
+    .stats-bar {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .stat-cell {
+      padding: 36px 32px 40px;
+      border-right: 1px solid var(--border-dark);
+      min-width: 0;
+    }
+
+    .stat-cell:first-child {
+      padding-left: 40px;
+    }
+
+    .stat-cell:last-child {
+      border-right: none;
+    }
+
+    .stat-tag {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .stat-value {
+      font-family: var(--font-serif);
+      font-weight: 300;
+      font-size: clamp(40px, 4.2vw, 56px);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+
+    .stat-value sup {
+      font-size: 0.52em;
+      vertical-align: super;
+      margin-left: 1px;
+    }
+
+    .stat-label {
+      font-size: 12.5px;
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--text-muted);
+      max-width: 205px;
+    }
+
+    /* ===================== MISSION ===================== */
+    .mission-section {
+      position: relative;
+      z-index: 2;
+      padding: 120px 0 130px;
+      border-bottom: 1px solid var(--border-dark);
+      overflow: hidden;
+    }
+
+    .orbital-arcs {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 46%;
+      width: 100%;
+      height: 360px;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.55;
+    }
+
+    .mission-header-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+      gap: 48px;
+      align-items: end;
+      padding-bottom: 64px;
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    .mission-eyebrow-wrap {
+      padding-bottom: 14px;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-weight: 300;
+      font-size: clamp(42px, 5.4vw, 74px);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
+    .mission-body-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      gap: 72px;
+      padding: 64px 0 80px;
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    .mission-lead {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(23px, 2.3vw, 31px);
+      line-height: 1.38;
+      color: #d8dae3;
+      max-width: 500px;
+    }
+
+    .mission-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.72;
+      color: var(--text-secondary);
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 48px;
+      padding-top: 48px;
+    }
+
+    .pillar-title {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 32px;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .pillar-desc {
+      font-size: 13.5px;
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      max-width: 280px;
+    }
+
+    /* ===================== PLATFORM ===================== */
+    .platform-section {
+      position: relative;
+      z-index: 2;
+      padding: 112px 0 130px;
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    .platform-header-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+      gap: 48px;
+      align-items: end;
+      margin-bottom: 68px;
+    }
+
+    .observatories-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      border: 1px solid var(--border-dark);
+      background: rgba(8, 9, 13, 0.74);
+      backdrop-filter: blur(6px);
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .observatories-grid.highlight-pulse {
+      border-color: rgba(235, 200, 91, 0.55);
+      box-shadow: 0 0 48px rgba(235, 200, 91, 0.12);
+    }
+
+    .obs-card {
+      position: relative;
+      min-width: 0;
+      padding: 46px 48px 42px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid var(--border-dark);
+      border-bottom: 1px solid var(--border-dark);
+      transition: background-color 0.3s ease;
+    }
+
+    .obs-card:nth-child(2n) {
+      border-right: none;
+    }
+
+    .obs-card:nth-child(3),
+    .obs-card:nth-child(4) {
+      border-bottom: none;
+    }
+
+    .obs-card:hover {
+      background-color: rgba(255, 255, 255, 0.022);
+    }
+
+    .obs-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .obs-code {
+      color: var(--gold);
+    }
+
+    .obs-tag {
+      color: var(--text-muted);
+      position: relative;
+      padding-right: 10px;
+    }
+
+    .obs-tag::after {
+      content: '+';
+      position: absolute;
+      right: -2px;
+      top: -6px;
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    .obs-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 34px;
+      min-width: 0;
+    }
+
+    .obs-name {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(42px, 4.8vw, 66px);
+      line-height: 1;
+      letter-spacing: -0.015em;
+      color: var(--text-primary);
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .obs-constellation {
+      width: 118px;
+      height: 82px;
+      flex-shrink: 0;
+    }
+
+    .obs-constellation svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .obs-card:hover .constellation-line {
+      stroke: rgba(235, 200, 91, 0.45);
+    }
+
+    .obs-card:hover .constellation-star-main {
+      fill: var(--gold);
+      filter: drop-shadow(0 0 4px rgba(235, 200, 91, 0.8));
+    }
+
+    .obs-desc {
+      font-size: 14.2px;
+      font-weight: 300;
+      line-height: 1.68;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+    }
+
+    .obs-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-dark);
+    }
+
+    .obs-metric-label {
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      overflow-wrap: anywhere;
+    }
+
+    .obs-metric-val {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: 22px;
+      color: var(--text-primary);
+      line-height: 1.1;
+    }
+
+    .obs-metric-val sup {
+      font-size: 0.6em;
+      vertical-align: super;
+    }
+
+    /* ===================== MANIFESTO (DARK SKY COHESIVE) ===================== */
+    .manifesto-section {
+      position: relative;
+      z-index: 2;
+      padding: 116px 0 120px;
+      border-bottom: 1px solid var(--border-dark);
+      background: linear-gradient(180deg, rgba(13, 15, 23, 0.55) 0%, rgba(8, 9, 13, 0.78) 100%);
+      backdrop-filter: blur(4px);
+    }
+
+    .manifesto-card {
+      border: 1px solid rgba(235, 200, 91, 0.18);
+      background: rgba(11, 13, 20, 0.72);
+      padding: 64px 64px 52px;
+      position: relative;
+    }
+
+    .manifesto-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+      gap: 64px;
+      align-items: end;
+      margin-bottom: 56px;
+    }
+
+    .manifesto-title {
+      font-family: var(--font-serif);
+      font-weight: 300;
+      font-size: clamp(44px, 5.4vw, 78px);
+      line-height: 0.98;
+      letter-spacing: -0.025em;
+      color: var(--text-primary);
+    }
+
+    .manifesto-title em {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--gold);
+    }
+
+    .manifesto-statement-wrap {
+      border-top: 1px solid var(--border-dark);
+      padding-top: 32px;
+    }
+
+    .manifesto-statement {
+      font-family: var(--font-serif);
+      font-weight: 300;
+      font-size: clamp(22px, 2.3vw, 31px);
+      line-height: 1.42;
+      letter-spacing: -0.01em;
+      color: #dfe1ea;
+    }
+
+    .manifesto-statement em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--gold);
+    }
+
+    .manifesto-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 28px;
+      border-top: 1px solid var(--border-dark);
+    }
+
+    .manifesto-sig {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 24px;
+      color: var(--text-primary);
+    }
+
+    .manifesto-date {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ===================== FOOTER ===================== */
+    .footer-section {
+      position: relative;
+      z-index: 2;
+      padding: 80px 0 72px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+      gap: 48px;
+      padding-bottom: 64px;
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    .footer-brand-desc {
+      margin-top: 16px;
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.62;
+      color: var(--text-muted);
+      max-width: 265px;
+    }
+
+    .footer-col-title {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+    }
+
+    .footer-links a {
+      font-size: 13.5px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 28px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ===================== ACCESSIBLE MODAL ===================== */
+    .modal-backdrop[hidden] {
+      display: none !important;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 6, 9, 0.84);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .modal-card {
+      width: 100%;
+      max-width: 480px;
+      max-height: calc(100vh - 40px);
+      max-height: calc(100dvh - 40px);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      background: #0d0f16;
+      border: 1px solid rgba(235, 200, 91, 0.24);
+      padding: 40px 36px 36px;
+      position: relative;
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.75);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 18px;
+      background: none;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 18px;
+      width: 32px;
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 2px;
+    }
+
+    .modal-close:hover,
+    .modal-close:focus-visible {
+      color: var(--text-primary);
+      border-color: rgba(235, 200, 91, 0.45);
+      outline: none;
+    }
+
+    .modal-title {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: 36px;
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .modal-sub {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.62;
+      margin-bottom: 24px;
+    }
+
+    .modal-status-box {
+      padding: 16px;
+      border: 1px solid var(--border-dark);
+      background: rgba(255, 255, 255, 0.02);
+      margin-bottom: 24px;
+    }
+
+    .modal-status-title {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .modal-status-text {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    .modal-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* ===================== RESPONSIVE ===================== */
+    @media (max-width: 1024px) {
+      .container, .navbar, .hero {
+        padding-left: 36px;
+        padding-right: 36px;
+      }
+      .manifesto-card {
+        padding: 40px 32px;
+      }
+      .hero-main,
+      .mission-header-grid,
+      .mission-body-grid,
+      .platform-header-grid,
+      .manifesto-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 36px;
+      }
+      .stats-bar {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .stat-cell {
+        border-bottom: 1px solid var(--border-dark);
+      }
+      .observatories-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .obs-card {
+        border-right: none !important;
+        border-bottom: 1px solid var(--border-dark) !important;
+      }
+      .obs-card:last-child {
+        border-bottom: none !important;
+      }
+      .footer-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-links, .nav-coords, .astro-rail {
+        display: none;
+      }
+      .container, .navbar, .hero {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      .hero {
+        min-height: auto;
+        padding-top: 24px;
+        padding-bottom: 48px;
+      }
+      .hero-main {
+        margin-top: 56px;
+      }
+      .stat-cell,
+      .stat-cell:first-child {
+        padding: 28px 20px;
+        border-right: none;
+      }
+      .pillars-grid,
+      .stats-bar,
+      .footer-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .obs-card {
+        padding: 28px 20px 26px;
+      }
+      .obs-title-row {
+        flex-wrap: wrap;
+        margin-bottom: 24px;
+      }
+      .obs-name {
+        font-size: clamp(34px, 10vw, 48px);
+      }
+      .obs-constellation {
+        width: 82px;
+        height: 56px;
+      }
+      .obs-metrics {
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+        gap: 14px;
+      }
+      .manifesto-card {
+        padding: 28px 20px;
+      }
+      .modal-card {
+        padding: 28px 20px 24px;
+      }
+      .footer-bottom,
+      .manifesto-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .container, .navbar, .hero {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+      .obs-card {
+        padding: 22px 16px 20px;
+      }
+      .obs-metrics {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+      .live-dot {
+        animation: none;
+      }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body class="celestial-grid">
+
+  <!-- Animated Background Comet & Perseid Meteor Shower Canvas -->
+  <canvas id="sky-canvas" aria-hidden="true"></canvas>
+
+  <!-- ===================== HEADER / NAVBAR ===================== -->
+  <header class="navbar" id="site-header">
+    <div class="nav-left">
+      <a href="#" class="brand">
+        <span class="brand-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+            <circle cx="10" cy="10" r="5.5" stroke="#ebc85b" stroke-width="1.1" stroke-dasharray="2.2 1.8" />
+            <circle cx="10" cy="10" r="2" fill="#ebc85b" />
+            <circle cx="14.5" cy="6.2" r="1.1" fill="#fff6d6" />
+          </svg>
+        </span>
+        Persydos <span class="ai">AI</span>
+      </a>
+      <span class="nav-coords">Α 03ʰ04ᵐ · Δ +58°</span>
+    </div>
+
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#mission">Mission</a>
+      <a href="#platform">Platform</a>
+      <a href="#manifesto">Manifesto</a>
+    </nav>
+
+    <div class="nav-actions">
+      <button type="button" class="btn-light" data-open-modal="access" aria-haspopup="dialog" aria-controls="access-modal">
+        Stay tuned <span aria-hidden="true">→</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="site-main">
+    <!-- ===================== HERO SECTION ===================== -->
+    <section class="hero-wrapper">
+      <div class="hero">
+        <!-- Left Vertical Astronomical Telemetry Rail -->
+        <div class="astro-rail" aria-hidden="true">
+          <span class="astro-rail-mag">MAG −1.4</span>
+          <span class="astro-rail-line"></span>
+          <span class="astro-rail-radiant">PERSEID RADIANT · 03ʰ 04ᵐ +58°</span>
+        </div>
+
+        <!-- Corner Reticles -->
+        <div class="reticle-bl" aria-hidden="true"></div>
+        <div class="reticle-br" aria-hidden="true"></div>
+
+        <!-- Top-Right Live Telemetry HUD -->
+        <div class="telemetry-hud" id="telemetry-hud" aria-label="Observatory Telemetry">
+          <div class="telemetry-live">
+            <span class="live-dot"></span>
+            <span>OBSERVATORY CLOCK</span>
+          </div>
+          <div id="live-utc-clock">---- -- -- --:--:-- UTC</div>
+          <div id="live-swarm-count">4 OBSERVATORIES · LOCAL-FIRST</div>
+        </div>
+
+        <!-- Main Hero Content -->
+        <div class="hero-main">
+          <div class="hero-left">
+            <div class="eyebrow">
+              <span class="spark">⟢</span>
+              <span>AN INTELLIGENCE COMPANY</span>
+            </div>
+            <h1 class="hero-title">
+              A shower<br />
+              of <em>minds,</em><br />
+              watched from<br />
+              <em>home.</em>
+            </h1>
+          </div>
+
+          <div class="hero-right">
+            <p class="hero-desc">
+              Persydos AI builds home-centric, multi-agent systems
+              for people who'd rather their intelligence live close.
+              Swarms that think on the kitchen counter, retrieval that
+              never leaks, a bridge to the cloud that carries no keys.
+              Privacy and security first — sovereignty by design.
+            </p>
+            <div class="hero-ctas">
+              <a href="#platform" class="btn-HeroPrimary" id="watch-swarm-btn">
+                Watch the swarm <span aria-hidden="true">→</span>
+              </a>
+              <a href="#manifesto" class="link-underline">Read the manifesto</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 5-COLUMN DESIGN TARGETS BAR ===================== -->
+    <section class="stats-bar-wrapper" aria-label="Architecture Design Targets">
+      <div class="stats-bar">
+        <div class="stat-cell">
+          <div class="stat-tag">DESIGN TARGET</div>
+          <div class="stat-value">10<sup>9</sup></div>
+          <div class="stat-label">target document scale for local-first hybrid indexing</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-tag">DESIGN TARGET</div>
+          <div class="stat-value">&lt; 5s</div>
+          <div class="stat-label">target p50 time to consensus across local swarm peers</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-tag">DESIGN PRINCIPLE</div>
+          <div class="stat-value">0</div>
+          <div class="stat-label">private keys transmitted across external boundaries</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-tag">ARCHITECTURE</div>
+          <div class="stat-value">4</div>
+          <div class="stat-label">core observatories in the Persydos stack</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-tag">DEFAULT POSTURE</div>
+          <div class="stat-value">100%</div>
+          <div class="stat-label">default home state on-device; cloud invoked only on request</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== MISSION ===================== -->
+    <section id="mission" class="mission-section">
+      <!-- Background Dotted Orbital Arcs -->
+      <svg class="orbital-arcs" viewBox="0 0 1440 360" fill="none" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M-80 340 Q 720 -90 1520 340" stroke="rgba(255,255,255,0.11)" stroke-width="1" stroke-dasharray="2.5 5.5" />
+        <path d="M-80 375 Q 720 -40 1520 375" stroke="rgba(255,255,255,0.07)" stroke-width="1" stroke-dasharray="2 6" />
+      </svg>
+
+      <div class="container">
+        <div class="mission-header-grid">
+          <div class="mission-eyebrow-wrap">
+            <div class="eyebrow" style="margin-bottom: 0;">
+              <span class="spark">⟢</span>
+              <span>MISSION · WHY WE EXIST</span>
+            </div>
+          </div>
+          <h2 class="section-title">
+            Intelligence is better<br />
+            when it's <span class="gold-italic">closer to home.</span>
+          </h2>
+        </div>
+
+        <div class="mission-body-grid">
+          <p class="mission-lead">
+            We're building Persydos AI to put real intelligence
+            — not a thin client, not a remote API — into
+            homes, small teams, and independent operators.
+          </p>
+          <div class="mission-copy">
+            <p>
+              The cloud has done extraordinary work to make AI possible at scale, and it
+              will keep doing so. Alongside it, we think there's room — and real demand
+              — for intelligence that lives closer to the people using it: on the phone in
+              your hand, the laptop on the desk, the small box in the closet.
+            </p>
+            <p>
+              Democratizing AI, to us, simply means more places where compute,
+              memory, and keys can comfortably live. Persydos AI complements the
+              cloud rather than replacing it, and reaches for it only when you ask.
+            </p>
+          </div>
+        </div>
+
+        <div class="pillars-grid">
+          <div class="pillar">
+            <h3 class="pillar-title">Yours.</h3>
+            <p class="pillar-desc">Your data, your devices, your keys. Always.</p>
+          </div>
+          <div class="pillar">
+            <h3 class="pillar-title">Open.</h3>
+            <p class="pillar-desc">Open weights, open protocols, open seats at the table.</p>
+          </div>
+          <div class="pillar">
+            <h3 class="pillar-title">Plural.</h3>
+            <p class="pillar-desc">Many small minds in concert beat one big mind alone.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PLATFORM ===================== -->
+    <section id="platform" class="platform-section">
+      <div class="container">
+        <div class="platform-header-grid">
+          <div class="mission-eyebrow-wrap">
+            <div class="eyebrow" style="margin-bottom: 0;">
+              <span class="spark">⟢</span>
+              <span>PLATFORM · FOUR OBSERVATORIES</span>
+            </div>
+          </div>
+          <h2 class="section-title">
+            Many instruments.<br />
+            One <span class="gold-italic">shared sky.</span>
+          </h2>
+        </div>
+
+        <div class="observatories-grid" id="observatories-grid">
+          <!-- P-01 Boterra -->
+          <article class="obs-card" id="obs-boterra">
+            <div>
+              <div class="obs-meta">
+                <span class="obs-code">P-01</span>
+                <span class="obs-tag">MULTI-AGENT PLATFORM</span>
+              </div>
+              <div class="obs-title-row">
+                <h3 class="obs-name">Boterra</h3>
+                <div class="obs-constellation" aria-hidden="true">
+                  <svg viewBox="0 0 120 80" fill="none">
+                    <polyline class="constellation-line" points="28,36 33,62 66,74 86,52 68,26" stroke="rgba(255,255,255,0.2)" stroke-width="0.9" />
+                    <circle cx="14" cy="48" r="0.9" fill="rgba(255,255,255,0.35)" />
+                    <circle cx="52" cy="44" r="1" fill="rgba(255,255,255,0.4)" />
+                    <circle cx="28" cy="36" r="1.6" fill="#d8dae3" />
+                    <circle cx="33" cy="62" r="1.6" fill="#d8dae3" />
+                    <circle class="constellation-star-main" cx="66" cy="74" r="2.1" fill="#f3f1ea" />
+                    <circle cx="86" cy="52" r="1.7" fill="#d8dae3" />
+                    <circle class="constellation-star-main" cx="68" cy="26" r="1.9" fill="#ebc85b" />
+                  </svg>
+                </div>
+              </div>
+              <p class="obs-desc">
+                Spawn, orchestrate, and observe constellations of agents that live where
+                you live — on the kitchen counter, in the home server, on the family laptop,
+                and on the cloud when the work demands it. Local and remote agents
+                negotiate as one swarm; sensitive context stays home, raw horsepower
+                comes from the cloud.
+              </p>
+            </div>
+            <div class="obs-metrics">
+              <div>
+                <div class="obs-metric-label">TARGET SCALE</div>
+                <div class="obs-metric-val">1 — 10<sup>k</sup></div>
+              </div>
+              <div>
+                <div class="obs-metric-label">TARGET CONSENSUS</div>
+                <div class="obs-metric-val">&lt; 5 s</div>
+              </div>
+              <div>
+                <div class="obs-metric-label">EXECUTION</div>
+                <div class="obs-metric-val">local-first</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- P-02 Olxion -->
+          <article class="obs-card" id="obs-olxion">
+            <div>
+              <div class="obs-meta">
+                <span class="obs-code">P-02</span>
+                <span class="obs-tag">SELF-IMPROVING HOME AGENT</span>
+              </div>
+              <div class="obs-title-row">
+                <h3 class="obs-name">Olxion</h3>
+                <div class="obs-constellation" aria-hidden="true">
+                  <svg viewBox="0 0 120 80" fill="none">
+                    <polygon class="constellation-line" points="64,14 98,34 86,68 42,66 26,44" stroke="rgba(255,255,255,0.16)" stroke-width="0.85" stroke-dasharray="2 3" />
+                    <circle cx="64" cy="14" r="1.8" fill="#d8dae3" />
+                    <circle cx="98" cy="34" r="1.5" fill="#d8dae3" />
+                    <circle class="constellation-star-main" cx="86" cy="68" r="2.1" fill="#f3f1ea" />
+                    <circle cx="42" cy="66" r="1.5" fill="#d8dae3" />
+                    <circle cx="26" cy="44" r="1.7" fill="#d8dae3" />
+                    <circle class="constellation-star-main" cx="62" cy="43" r="1.8" fill="#ebc85b" />
+                    <circle cx="74" cy="69" r="1.1" fill="rgba(255,255,255,0.45)" />
+                  </svg>
+                </div>
+              </div>
+              <p class="obs-desc">
+                A long-running agent that lives on the home network and gets smarter the
+                longer it runs. It learns the rhythms of the household through continuous
+                SFT and RL on its own traces — refining its playbooks nightly, paging a
+                cloud swarm only when the work demands it.
+              </p>
+            </div>
+            <div class="obs-metrics">
+              <div>
+                <div class="obs-metric-label">DEFAULT STATE</div>
+                <div class="obs-metric-val">on-device</div>
+              </div>
+              <div>
+                <div class="obs-metric-label">NIGHTLY</div>
+                <div class="obs-metric-val">SFT + RL</div>
+              </div>
+              <div>
+                <div class="obs-metric-label">MEMORY HORIZON</div>
+                <div class="obs-metric-val">years</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- P-03 Protosend -->
+          <article class="obs-card" id="obs-protosend">
+            <div>
+              <div class="obs-meta">
+                <span class="obs-code">P-03</span>
+                <span class="obs-tag">THE BRIDGE BETWEEN WORLDS</span>
+              </div>
+              <div class="obs-title-row">
+                <h3 class="obs-name">Protosend</h3>
+                <div class="obs-constellation" aria-hidden="true">
+                  <svg viewBox="0 0 120 80" fill="none">
+                    <path class="constellation-line" d="M24,48 L48,26 L76,50 L98,38" stroke="rgba(255,255,255,0.18)" stroke-width="0.9" />
+                    <line class="constellation-line" x1="48" y1="26" x2="46" y2="66" stroke="rgba(255,255,255,0.14)" stroke-width="0.8" />
+                    <circle cx="24" cy="48" r="1.6" fill="#d8dae3" />
+                    <circle class="constellation-star-main" cx="48" cy="26" r="2.1" fill="#f3f1ea" />
+                    <circle cx="56" cy="27" r="1.2" fill="rgba(255,255,255,0.5)" />
+                    <circle cx="46" cy="66" r="1.5" fill="#d8dae3" />
+                    <circle class="constellation-star-main" cx="76" cy="50" r="1.9" fill="#ebc85b" />
+                    <circle cx="75" cy="64" r="1.7" fill="#d8dae3" />
+                    <circle cx="98" cy="38" r="1.6" fill="#d8dae3" />
+                  </svg>
+                </div>
+              </div>
+              <p class="obs-desc">
+                One secure bridge between your phone, your home agents, your MCP
+                servers, and the cloud. Carry a swarm in your pocket; let it reach back to
+                the kitchen and out to the rack — with end-to-end attestation, no key ever
+                leaves your devices.
+              </p>
+            </div>
+            <div class="obs-metrics">
+              <div>
+                <div class="obs-metric-label">ATTESTATION</div>
+                <div class="obs-metric-val">owner-approved</div>
+              </div>
+              <div>
+                <div class="obs-metric-label">KEYS IN TRANSIT</div>
+                <div class="obs-metric-val">zero</div>
+              </div>
+              <div>
+                <div class="obs-metric-label">ENDPOINTS</div>
+                <div class="obs-metric-val">every device</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- P-04 FilClade -->
+          <article class="obs-card" id="obs-filclade">
+            <div>
+              <div class="obs-meta">
+                <span class="obs-code">P-04</span>
+                <span class="obs-tag">RETRIEVAL &amp; RAG</span>
+              </div>
+              <div class="obs-title-row">
+                <h3 class="obs-name">FilClade</h3>
+                <div class="obs-constellation" aria-hidden="true">
+                  <svg viewBox="0 0 120 80" fill="none">
+                    <path class="constellation-line" d="M22,56 L36,26 L74,20 L102,48 L66,60 L66,76" stroke="rgba(255,255,255,0.18)" stroke-width="0.9" />
+                    <line class="constellation-line" x1="74" y1="20" x2="66" y2="60" stroke="rgba(255,255,255,0.14)" stroke-width="0.8" />
+                    <circle cx="22" cy="56" r="1.7" fill="#d8dae3" />
+                    <circle cx="34" cy="26" r="1.5" fill="#d8dae3" />
+                    <circle cx="39" cy="26" r="1.2" fill="rgba(255,255,255,0.5)" />
+                    <circle class="constellation-star-main" cx="74" cy="20" r="2.0" fill="#ebc85b" />
+                    <circle cx="102" cy="48" r="1.7" fill="#d8dae3" />
+                    <circle class="constellation-star-main" cx="66" cy="60" r="2.0" fill="#f3f1ea" />
+                    <circle cx="66" cy="76" r="1.4" fill="#d8dae3" />
+                  </svg>
+                </div>
+              </div>
+              <p class="obs-desc">
+                A retrieval layer designed for swarms — many agents asking many
+                questions at once. Hybrid graph-vector index, sub-100ms target recall
+                at billion-document scale, audit-grade lineage.
+              </p>
+            </div>
+            <div class="obs-metrics">
+              <div>
+                <div class="obs-metric-label">TARGET INDEX</div>
+                <div class="obs-metric-val">10<sup>9</sup> docs</div>
+              </div>
+              <div>
+                <div class="obs-metric-label">TARGET RECALL</div>
+                <div class="obs-metric-val">&lt; 100 ms</div>
+              </div>
+              <div>
+                <div class="obs-metric-label">LINEAGE</div>
+                <div class="obs-metric-val">cryptographic</div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== MANIFESTO ===================== -->
+    <section id="manifesto" class="manifesto-section">
+      <div class="container">
+        <div class="manifesto-card">
+          <div class="eyebrow" style="margin-bottom: 28px;">
+            <span class="spark">⟢</span>
+            <span>MANIFESTO · ARCHITECTURAL PRINCIPLE</span>
+          </div>
+
+          <div class="manifesto-grid">
+            <div>
+              <h2 class="manifesto-title">
+                Sovereignty<br />
+                is not a<br />
+                <em>feature.</em>
+              </h2>
+            </div>
+
+            <div class="manifesto-statement-wrap">
+              <p class="manifesto-statement">
+                An intelligence that only works by streaming your keys, your memory,
+                and your private context to someone else's cluster is not <em>yours</em>.
+                We build multi-agent systems that execute on your hardware first,
+                verify work across independent peers, and treat every retrieval,
+                message, and tool call as an auditable contract under your control.
+              </p>
+            </div>
+          </div>
+
+          <div class="manifesto-footer">
+            <div class="manifesto-sig">— Persydos AI</div>
+            <div class="manifesto-date">Α 03ʰ04ᵐ · Δ +58°</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer-section" id="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="#" class="brand">
+            <span class="brand-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="10" r="5.5" stroke="#ebc85b" stroke-width="1.1" stroke-dasharray="2.2 1.8" />
+                <circle cx="10" cy="10" r="2" fill="#ebc85b" />
+                <circle cx="14.5" cy="6.2" r="1.1" fill="#fff6d6" />
+              </svg>
+            </span>
+            Persydos <span class="ai">AI</span>
+          </a>
+          <p class="footer-brand-desc">
+            Home-centric, multi-agent systems. Local by default; sovereign by design.
+          </p>
+        </div>
+
+        <div>
+          <div class="footer-col-title">PLATFORM</div>
+          <ul class="footer-links">
+            <li><a href="#obs-boterra">Boterra</a></li>
+            <li><a href="#obs-olxion">Olxion</a></li>
+            <li><a href="#obs-protosend">Protosend</a></li>
+            <li><a href="#obs-filclade">FilClade</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">NAVIGATION</div>
+          <ul class="footer-links">
+            <li><a href="#mission">Mission</a></li>
+            <li><a href="#platform">Platform</a></li>
+            <li><a href="#manifesto">Manifesto</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 PERSYDOS AI LLC · Α 03ʰ04ᵐ · Δ +58°</div>
+        <div>MADE UNDER A DARK SKY.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== STAY TUNED (COMING SOON) MODAL ===================== -->
+  <div class="modal-backdrop" id="access-modal" role="dialog" aria-modal="true" aria-labelledby="modal-heading" hidden inert>
+    <div class="modal-card">
+      <button type="button" class="modal-close" id="modal-close-btn" aria-label="Close dialog">×</button>
+      <div class="eyebrow" style="margin-bottom: 12px;">
+        <span class="spark">⟢</span>
+        <span>PERSEID RELEASES · COMING SOON</span>
+      </div>
+      <h3 class="modal-title" id="modal-heading">Stay <span class="gold-italic">tuned.</span></h3>
+      <p class="modal-sub">
+        Boterra, Olxion, Protosend, and FilClade are currently in active development. Public repositories, technical previews, and self-hosting documentation will be published as each observatory reaches release readiness.
+      </p>
+      <div class="modal-status-box">
+        <div class="modal-status-title">● RELEASE DISPATCHES COMING SOON</div>
+        <div class="modal-status-text">
+          We do not collect email addresses ahead of release. Follow the Persydos AI GitHub organization to watch repository releases and architecture notes directly.
+        </div>
+      </div>
+      <div class="modal-actions">
+        <a href="https://github.com/persydos-ai" target="_blank" rel="noopener noreferrer" class="btn-gold">
+          Follow on GitHub <span aria-hidden="true">→</span>
+        </a>
+        <button type="button" class="btn-light" id="modal-dismiss-btn">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== SCRIPTS: COMET SHOWER, MOTION & DIALOG ===================== -->
+  <script>
+    (function () {
+      /* 1. Live UTC Clock */
+      const clockEl = document.getElementById('live-utc-clock');
+      function pad(n) {
+        return n < 10 ? '0' + n : '' + n;
+      }
+      function updateClock() {
+        const now = new Date();
+        const yyyy = now.getUTCFullYear();
+        const mm = pad(now.getUTCMonth() + 1);
+        const dd = pad(now.getUTCDate());
+        const hh = pad(now.getUTCHours());
+        const min = pad(now.getUTCMinutes());
+        const ss = pad(now.getUTCSeconds());
+        if (clockEl) {
+          clockEl.textContent = `${yyyy}-${mm}-${dd} ${hh}:${min}:${ss} UTC`;
+        }
+      }
+      updateClock();
+      setInterval(updateClock, 1000);
+
+      /* 2. Background Comet & Perseid Meteor Shower Canvas (with prefers-reduced-motion support) */
+      const canvas = document.getElementById('sky-canvas');
+      const ctx = canvas.getContext('2d');
+      const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+      let width = window.innerWidth;
+      let height = window.innerHeight;
+      let dpr = Math.min(window.devicePixelRatio || 1, 2);
+      let rafId = null;
+
+      const stars = [];
+      const comets = [];
+      const sparks = [];
+
+      function initStars() {
+        stars.length = 0;
+        const count = Math.floor((width * height) / 7200);
+        for (let i = 0; i < count; i++) {
+          const isWarm = Math.random() < 0.22;
+          stars.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            r: Math.random() < 0.86 ? 0.5 + Math.random() * 0.8 : 1.2 + Math.random() * 1.0,
+            baseAlpha: 0.16 + Math.random() * 0.65,
+            phase: Math.random() * Math.PI * 2,
+            twinkleSpeed: 0.008 + Math.random() * 0.022,
+            color: isWarm ? '235, 200, 91' : '243, 241, 234'
+          });
+        }
+      }
+
+      function spawnComet(options = {}) {
+        const isHeroBolide = Boolean(options.heroBolide);
+        const baseAngle = -14.5 * (Math.PI / 180);
+        const angleJitter = (Math.random() - 0.5) * 0.09;
+        const angle = options.angle !== undefined ? options.angle : baseAngle + angleJitter;
+
+        const speed = isHeroBolide
+          ? 2.2 + Math.random() * 0.8
+          : 2.8 + Math.random() * 3.8;
+
+        const tailLength = isHeroBolide
+          ? 210 + Math.random() * 70
+          : 110 + Math.random() * 140;
+
+        const headRadius = isHeroBolide
+          ? 3.2
+          : 1.4 + Math.random() * 1.5;
+
+        let startX, startY;
+        if (options.x !== undefined && options.y !== undefined) {
+          startX = options.x;
+          startY = options.y;
+        } else if (isHeroBolide) {
+          startX = width * 0.06;
+          startY = height * 0.44 + (Math.random() - 0.5) * 80;
+        } else {
+          startX = -120 + Math.random() * (width * 0.85);
+          startY = height * 0.15 + Math.random() * (height * 0.85);
+        }
+
+        const maxLife = isHeroBolide
+          ? 280 + Math.random() * 80
+          : 140 + Math.random() * 130;
+
+        comets.push({
+          x: startX,
+          y: startY,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          angle,
+          tailLength,
+          headRadius,
+          isHeroBolide,
+          life: 0,
+          maxLife,
+          peakAlpha: isHeroBolide ? 0.96 : 0.45 + Math.random() * 0.45
+        });
+      }
+
+      function seedInitialShower() {
+        comets.length = 0;
+        sparks.length = 0;
+        spawnComet({
+          heroBolide: true,
+          x: width * 0.34,
+          y: Math.min(height * 0.32, 280),
+          angle: -14.5 * (Math.PI / 180)
+        });
+        comets[0].life = 85;
+
+        if (!motionQuery.matches) {
+          for (let i = 0; i < 5; i++) {
+            spawnComet({
+              x: Math.random() * width,
+              y: Math.random() * height
+            });
+            comets[comets.length - 1].life = Math.floor(Math.random() * 90);
+          }
+        }
+      }
+
+      function drawComet(c) {
+        const progress = c.life / c.maxLife;
+        let envelope = 1;
+        if (progress < 0.18) {
+          envelope = progress / 0.18;
+        } else if (progress > 0.76) {
+          envelope = Math.max(0, (1 - progress) / 0.24);
+        }
+        const alpha = c.peakAlpha * envelope;
+        if (alpha <= 0.01) return;
+
+        const currentTail = c.tailLength * Math.min(1, progress * 3.2);
+        const tailX = c.x - Math.cos(c.angle) * currentTail;
+        const tailY = c.y - Math.sin(c.angle) * currentTail;
+
+        ctx.save();
+
+        const wakeGrad = ctx.createLinearGradient(tailX, tailY, c.x, c.y);
+        wakeGrad.addColorStop(0, 'rgba(235, 200, 91, 0)');
+        wakeGrad.addColorStop(0.55, `rgba(235, 195, 78, ${alpha * 0.12})`);
+        wakeGrad.addColorStop(1, `rgba(244, 214, 118, ${alpha * 0.45})`);
+
+        ctx.strokeStyle = wakeGrad;
+        ctx.lineWidth = c.headRadius * 3.4;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(tailX, tailY);
+        ctx.lineTo(c.x, c.y);
+        ctx.stroke();
+
+        const coreGrad = ctx.createLinearGradient(tailX, tailY, c.x, c.y);
+        coreGrad.addColorStop(0, 'rgba(235, 200, 91, 0)');
+        coreGrad.addColorStop(0.4, `rgba(235, 200, 91, ${alpha * 0.35})`);
+        coreGrad.addColorStop(0.85, `rgba(248, 224, 142, ${alpha * 0.85})`);
+        coreGrad.addColorStop(1, `rgba(255, 250, 230, ${alpha})`);
+
+        ctx.strokeStyle = coreGrad;
+        ctx.lineWidth = Math.max(1.1, c.headRadius * 0.85);
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(tailX, tailY);
+        ctx.lineTo(c.x, c.y);
+        ctx.stroke();
+
+        const haloRadius = c.headRadius * (c.isHeroBolide ? 9.5 : 6.5);
+        const haloGrad = ctx.createRadialGradient(c.x, c.y, 0, c.x, c.y, haloRadius);
+        haloGrad.addColorStop(0, `rgba(255, 244, 204, ${alpha * 0.9})`);
+        haloGrad.addColorStop(0.28, `rgba(235, 200, 91, ${alpha * 0.55})`);
+        haloGrad.addColorStop(0.65, `rgba(235, 185, 65, ${alpha * 0.15})`);
+        haloGrad.addColorStop(1, 'rgba(235, 185, 65, 0)');
+
+        ctx.fillStyle = haloGrad;
+        ctx.beginPath();
+        ctx.arc(c.x, c.y, haloRadius, 0, Math.PI * 2);
+        ctx.fill();
+
+        if (c.isHeroBolide) {
+          const knotX = c.x - Math.cos(c.angle) * 11;
+          const knotY = c.y - Math.sin(c.angle) * 11;
+          const knotGrad = ctx.createRadialGradient(knotX, knotY, 0, knotX, knotY, haloRadius * 0.65);
+          knotGrad.addColorStop(0, `rgba(248, 222, 135, ${alpha * 0.75})`);
+          knotGrad.addColorStop(0.45, `rgba(235, 195, 78, ${alpha * 0.3})`);
+          knotGrad.addColorStop(1, 'rgba(235, 195, 78, 0)');
+          ctx.fillStyle = knotGrad;
+          ctx.beginPath();
+          ctx.arc(knotX, knotY, haloRadius * 0.65, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        ctx.fillStyle = `rgba(255, 252, 240, ${alpha})`;
+        ctx.beginPath();
+        ctx.arc(c.x, c.y, c.headRadius * 0.9, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
+      }
+
+      function renderStaticSky() {
+        ctx.clearRect(0, 0, width, height);
+        for (let i = 0; i < stars.length; i++) {
+          const s = stars[i];
+          ctx.fillStyle = `rgba(${s.color}, ${s.baseAlpha.toFixed(3)})`;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        if (comets.length > 0) {
+          drawComet(comets[0]);
+        }
+      }
+
+      let frameCount = 0;
+
+      function animateSky() {
+        if (motionQuery.matches) {
+          rafId = null;
+          renderStaticSky();
+          return;
+        }
+
+        frameCount++;
+        ctx.clearRect(0, 0, width, height);
+
+        for (let i = 0; i < stars.length; i++) {
+          const s = stars[i];
+          s.phase += s.twinkleSpeed;
+          const alpha = s.baseAlpha * (0.65 + 0.35 * Math.sin(s.phase));
+          ctx.fillStyle = `rgba(${s.color}, ${alpha.toFixed(3)})`;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        let hasHeroBolide = false;
+        for (let i = comets.length - 1; i >= 0; i--) {
+          const c = comets[i];
+          c.x += c.vx;
+          c.y += c.vy;
+          c.life++;
+
+          if (c.isHeroBolide) hasHeroBolide = true;
+
+          if (c.isHeroBolide && frameCount % 3 === 0) {
+            sparks.push({
+              x: c.x - Math.cos(c.angle) * (8 + Math.random() * 24) + (Math.random() - 0.5) * 3,
+              y: c.y - Math.sin(c.angle) * (8 + Math.random() * 24) + (Math.random() - 0.5) * 3,
+              r: 0.6 + Math.random() * 0.9,
+              alpha: 0.55,
+              decay: 0.012 + Math.random() * 0.015
+            });
+          }
+
+          drawComet(c);
+
+          if (c.life >= c.maxLife || c.x > width + 300 || c.y < -300 || c.y > height + 300) {
+            comets.splice(i, 1);
+          }
+        }
+
+        for (let i = sparks.length - 1; i >= 0; i--) {
+          const sp = sparks[i];
+          sp.alpha -= sp.decay;
+          if (sp.alpha <= 0) {
+            sparks.splice(i, 1);
+            continue;
+          }
+          ctx.fillStyle = `rgba(235, 200, 91, ${sp.alpha.toFixed(3)})`;
+          ctx.beginPath();
+          ctx.arc(sp.x, sp.y, sp.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        if (!hasHeroBolide && Math.random() < 0.025) {
+          spawnComet({ heroBolide: true });
+        }
+        if (comets.length < 6 && Math.random() < 0.045) {
+          spawnComet();
+        }
+
+        rafId = requestAnimationFrame(animateSky);
+      }
+
+      function syncSkyMotion() {
+        if (rafId !== null) {
+          cancelAnimationFrame(rafId);
+          rafId = null;
+        }
+        seedInitialShower();
+        if (motionQuery.matches) {
+          renderStaticSky();
+        } else {
+          rafId = requestAnimationFrame(animateSky);
+        }
+      }
+
+      function resizeCanvas() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        initStars();
+        if (motionQuery.matches) {
+          seedInitialShower();
+          renderStaticSky();
+        }
+      }
+
+      window.addEventListener('resize', resizeCanvas);
+      if (typeof motionQuery.addEventListener === 'function') {
+        motionQuery.addEventListener('change', syncSkyMotion);
+      }
+      resizeCanvas();
+      syncSkyMotion();
+
+      /* 3. "Watch the swarm →" scroll to Platform Observatories (+ comet burst when motion allowed) */
+      const watchSwarmBtn = document.getElementById('watch-swarm-btn');
+      const telemetryHud = document.getElementById('telemetry-hud');
+      const obsGrid = document.getElementById('observatories-grid');
+      const platformSection = document.getElementById('platform');
+
+      if (watchSwarmBtn) {
+        watchSwarmBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          const reduceMotion = motionQuery.matches;
+
+          if (!reduceMotion) {
+            for (let i = 0; i < 8; i++) {
+              setTimeout(() => {
+                spawnComet({
+                  heroBolide: i % 2 === 0,
+                  x: width * (0.04 + Math.random() * 0.55),
+                  y: height * (0.15 + Math.random() * 0.7)
+                });
+              }, i * 90);
+            }
+          }
+
+          if (telemetryHud) {
+            telemetryHud.classList.add('flash');
+            setTimeout(() => telemetryHud.classList.remove('flash'), 1200);
+          }
+
+          if (platformSection) {
+            platformSection.scrollIntoView({
+              behavior: reduceMotion ? 'auto' : 'smooth',
+              block: 'start'
+            });
+          }
+          if (obsGrid) {
+            obsGrid.classList.add('highlight-pulse');
+            setTimeout(() => obsGrid.classList.remove('highlight-pulse'), 1800);
+          }
+        });
+      }
+
+      /* 4. Accessible Modal Dialog with Focus Management, Inert Background & Escape Handling */
+      const modal = document.getElementById('access-modal');
+      const closeBtn = document.getElementById('modal-close-btn');
+      const dismissBtn = document.getElementById('modal-dismiss-btn');
+      const backgroundRegions = [
+        document.getElementById('site-header'),
+        document.getElementById('site-main'),
+        document.getElementById('site-footer')
+      ].filter(Boolean);
+
+      let lastFocusedTrigger = null;
+
+      function getFocusableElements(container) {
+        return Array.from(
+          container.querySelectorAll(
+            'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+          )
+        );
+      }
+
+      function openModal(triggerEl) {
+        if (!modal) return;
+        lastFocusedTrigger = triggerEl || document.activeElement;
+        modal.removeAttribute('hidden');
+        modal.removeAttribute('inert');
+        backgroundRegions.forEach((el) => {
+          el.setAttribute('inert', '');
+          el.setAttribute('aria-hidden', 'true');
+        });
+        if (closeBtn) {
+          closeBtn.focus();
+        }
+      }
+
+      function closeModal() {
+        if (!modal || modal.hasAttribute('hidden')) return;
+        modal.setAttribute('hidden', '');
+        modal.setAttribute('inert', '');
+        backgroundRegions.forEach((el) => {
+          el.removeAttribute('inert');
+          el.removeAttribute('aria-hidden');
+        });
+        if (lastFocusedTrigger && typeof lastFocusedTrigger.focus === 'function') {
+          lastFocusedTrigger.focus();
+        }
+      }
+
+      document.querySelectorAll('[data-open-modal]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          openModal(btn);
+        });
+      });
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', closeModal);
+      }
+      if (dismissBtn) {
+        dismissBtn.addEventListener('click', closeModal);
+      }
+      if (modal) {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) closeModal();
+        });
+      }
+
+      document.addEventListener('keydown', (e) => {
+        if (!modal || modal.hasAttribute('hidden')) return;
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          closeModal();
+          return;
+        }
+        if (e.key === 'Tab') {
+          const focusables = getFocusableElements(modal);
+          if (focusables.length === 0) return;
+          const first = focusables[0];
+          const last = focusables[focusables.length - 1];
+          if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
