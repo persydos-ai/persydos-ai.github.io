@@ -922,11 +922,16 @@
       align-items: center;
       justify-content: center;
       padding: 20px;
+      overflow-y: auto;
     }
 
     .modal-card {
       width: 100%;
       max-width: 480px;
+      max-height: calc(100vh - 40px);
+      max-height: calc(100dvh - 40px);
+      overflow-y: auto;
+      overscroll-behavior: contain;
       background: #0d0f16;
       border: 1px solid rgba(235, 200, 91, 0.24);
       padding: 40px 36px 36px;
@@ -1235,7 +1240,7 @@
           <div class="stat-label">target p50 time to consensus across local swarm peers</div>
         </div>
         <div class="stat-cell">
-          <div class="stat-tag">GUARANTEE</div>
+          <div class="stat-tag">DESIGN PRINCIPLE</div>
           <div class="stat-value">0</div>
           <div class="stat-label">private keys transmitted across external boundaries</div>
         </div>

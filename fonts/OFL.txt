@@ -1,0 +1,14 @@
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+https://scripts.sil.org/OFL
+
+The bundled variable webfont subsets in this directory are licensed under the
+SIL Open Font License, Version 1.1:
+
+- Cormorant Garamond — Copyright (c) Christian Thalmann (Catharsis Fonts)
+- Inter — Copyright (c) The Inter Project Authors (Rasmus Andersson)
+- JetBrains Mono — Copyright (c) JetBrains s.r.o.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of the Font Software, to use, study, copy, merge, embed, modify, redistribute,
+and sell modified and unmodified copies of the Font Software, subject to the
+conditions of the SIL Open Font License 1.1.
