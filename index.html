@@ -832,8 +832,8 @@
 
     .footer-grid {
       display: grid;
-      grid-template-columns: 1.7fr repeat(4, 1fr);
-      gap: 36px;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
       padding-bottom: 64px;
       border-bottom: 1px solid var(--border-dark);
     }
@@ -1245,7 +1245,7 @@
 
       <div class="observatories-grid" id="observatories-grid">
         <!-- P-01 Boterra -->
-        <article class="obs-card">
+        <article class="obs-card" id="obs-boterra">
           <div>
             <div class="obs-meta">
               <span class="obs-code">P-01</span>
@@ -1291,7 +1291,7 @@
         </article>
 
         <!-- P-02 Olxion -->
-        <article class="obs-card">
+        <article class="obs-card" id="obs-olxion">
           <div>
             <div class="obs-meta">
               <span class="obs-code">P-02</span>
@@ -1336,7 +1336,7 @@
         </article>
 
         <!-- P-03 Protosend -->
-        <article class="obs-card">
+        <article class="obs-card" id="obs-protosend">
           <div>
             <div class="obs-meta">
               <span class="obs-code">P-03</span>
@@ -1382,7 +1382,7 @@
         </article>
 
         <!-- P-04 FilClade -->
-        <article class="obs-card">
+        <article class="obs-card" id="obs-filclade">
           <div>
             <div class="obs-meta">
               <span class="obs-code">P-04</span>
@@ -1490,45 +1490,25 @@
         <div>
           <div class="footer-col-title">PLATFORM</div>
           <ul class="footer-links">
-            <li><a href="#platform">Boterra</a></li>
-            <li><a href="#platform">Olxion</a></li>
-            <li><a href="#platform">Protosend</a></li>
-            <li><a href="#platform">FilClade</a></li>
+            <li><a href="#obs-boterra">Boterra</a></li>
+            <li><a href="#obs-olxion">Olxion</a></li>
+            <li><a href="#obs-protosend">Protosend</a></li>
+            <li><a href="#obs-filclade">FilClade</a></li>
           </ul>
         </div>
 
         <div>
-          <div class="footer-col-title">RESEARCH</div>
+          <div class="footer-col-title">NAVIGATION</div>
           <ul class="footer-links">
-            <li><a href="#platform">Papers</a></li>
-            <li><a href="#platform">Models</a></li>
-            <li><a href="#platform">Benchmarks</a></li>
-            <li><a href="#platform">Open source</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <div class="footer-col-title">COMPANY</div>
-          <ul class="footer-links">
+            <li><a href="#mission">Mission</a></li>
+            <li><a href="#platform">Platform</a></li>
             <li><a href="#manifesto">Manifesto</a></li>
-            <li><a href="#platform">Observatories</a></li>
-            <li><a href="#" data-open-modal="access">Updates</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <div class="footer-col-title">LEGAL</div>
-          <ul class="footer-links">
-            <li><a href="#manifesto">Terms</a></li>
-            <li><a href="#manifesto">Privacy</a></li>
-            <li><a href="#manifesto">Security</a></li>
-            <li><a href="#manifesto">Status</a></li>
           </ul>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <div>© 2026 PERSYDOS LABS, INC. · Α 03ʰ04ᵐ · Δ +58°</div>
+        <div>© 2026 PERSYDOS AI LLC · Α 03ʰ04ᵐ · Δ +58°</div>
         <div>MADE UNDER A DARK SKY.</div>
       </div>
     </div>
